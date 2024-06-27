@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.custom-font {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+
+:root {
+
+    --nav-color: white;
+}
+
+body {
+    background-color: black !important;
+    overflow-x: hidden;
+}
+
+.logo-image {
+    height: 50px;
+
+    aspect-ratio: 1/1;
+
+
+}
+
+.rs-nav-item a {
+    color: rgb(173, 230, 255);
+
+}
+
+#root {
+    height: 100dvh;
+    width: 100dvw;
+    position: relative;
+}
+
+.rs-nav-item a:is(:hover, :focus) {
+    color: var(--nav-color);
+    text-decoration: none !important;
+}
+
+.rs-nav-item a:is(:hover, :focus) .rs-nav-item {
+    background-color: cyan;
+}
+
+
+.gradient-bg {
+    background: linear-gradient(67deg, transparent, rgba(80, 202, 255, 0.393));
+}
+
+.container-body {
+    width: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* Customize scrollbar */
+body::-webkit-scrollbar {
+    width: 2px;
+    position: absolute
+}
+
+body::-webkit-scrollbar-track {
+    background: #af595938;
+    /* color of the track */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: white;
+    /* color of the thumb */
+    border-radius: 6px;
+    /* roundness of the thumb */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #63afff;
+    /* color of the thumb on hover */
+}

@@ -1,0 +1,13 @@
+.slick-dots li button:before {
+  color: #686868;
+  font-size: 12px;
+  transition: color 0.3s ease;
+}
+
+.slick-arrow .slick-prev::before {
+  color: #ff4f4f;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #ff4f4f;
+}

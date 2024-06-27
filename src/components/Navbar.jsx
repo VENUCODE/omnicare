@@ -1,0 +1,117 @@
+import { useState } from "react";
+import { PiPlantDuotone } from "react-icons/pi";
+import { IoHome } from "react-icons/io5";
+import { TbUserPentagon } from "react-icons/tb";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { VscAccount } from "react-icons/vsc";
+import "./navStyles.css";
+import logo from "../assets/omnicarelogo.svg";
+import { Link } from "react-router-dom";
+function Navbar() {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const [active, setActive] = useState("home");
+  return (
+    <>
+      {!isSmallDevice && (
+        <nav className="navbar navbar-expand-md bgblur  container fixed-top mx-auto rounded-5 shadow-sm my-1">
+          <div className="container py-1 px-3">
+            <Link to="/" className="navbar-brand poppins-bold">
+              <img src={logo} style={{ height: "2rem" }} />
+              <span className="tlg">MNI</span>CARE
+            </Link>
+            <div className="collapse navbar-collapse">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li className="nav-item poppins-regular">
+                  <Link to="/" className="nav-link">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item poppins-regular">
+                  <Link to="/plants" className="nav-link">
+                    Plants
+                  </Link>
+                </li>
+                <li className="nav-item poppins-regular">
+                  <Link to="/human" className="nav-link">
+                    Human
+                  </Link>
+                </li>
+                {/* <li className="nav-item poppins-regular">
+                  <Link to="" className="nav-link">
+                    profile
+                  </Link>
+                </li> */}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      )}
+      {isSmallDevice && (
+        <div className="fixed-bottom w-75 mx-auto bgblur d-flex justify-content-between my-2 px-3 py-1 rounded-5 gap-2 align-items-center">
+          <div className="w-auto d-flex justify-content-center align-items-center">
+            <span
+              className={`icon-container p-2 rounded-circle ${
+                active === "home" ? "icon-container-active" : "bg-dark"
+              }`}
+            >
+              <IoHome
+                className={`${active === "home" ? "icon-active tlg" : "icon"}`}
+                size={25}
+                onClick={() => {
+                  setActive("home");
+                }}
+              />
+            </span>
+          </div>
+          <div className="w-auto gap-4 position-relative bg-dark d-flex flex-row w-maxcontent px-4 rounded-5">
+            <span
+              className={`icon-container p-2 rounded-circle ${
+                active === "plant" ? "icon-container-active" : "bg-dark"
+              }`}
+            >
+              <PiPlantDuotone
+                className={`${active === "plant" ? "icon-active tlg" : "icon"}`}
+                size={25}
+                onClick={() => {
+                  setActive("plant");
+                }}
+              />
+            </span>
+            <span
+              className={`icon-container p-2 rounded-circle ${
+                active === "human" ? "icon-container-active" : "bg-dark"
+              }`}
+            >
+              <TbUserPentagon
+                className={`${active === "human" ? "icon-active tlg" : "icon"}`}
+                size={25}
+                onClick={() => {
+                  setActive("human");
+                }}
+              />
+            </span>
+          </div>
+          <div className="w-auto d-flex justify-content-center align-items-center">
+            <span
+              className={`icon-container p-2 rounded-circle ${
+                active === "profile" ? "icon-container-active" : "bg-dark"
+              }`}
+            >
+              <VscAccount
+                className={`${
+                  active === "profile" ? "icon-active tlg" : "icon"
+                }`}
+                size={25}
+                onClick={() => {
+                  setActive("profile");
+                }}
+              />
+            </span>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default Navbar;

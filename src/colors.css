@@ -1,0 +1,43 @@
+:root {
+  --dark: #0d0a0bff;
+  --gray: #454955ff;
+  --pale: #f3eff5ff;
+  --light-green: #72b01dff;
+  --dark-green: #3f7d20ff;
+}
+
+.tdark {
+  color: var(--dark);
+}
+
+.tgray {
+  color: var(--gray);
+}
+
+.tlg {
+  color: var(--light-green);
+}
+
+.tdg {
+  color: var(--dark-green);
+}
+
+.bgdark {
+  background-color: var(--dark);
+}
+
+.bggray {
+  background-color: var(--gray);
+}
+
+.bgpale {
+  background: var(--pale);
+}
+
+.bglg {
+  background-color: var(--light-green);
+}
+
+.bgdg {
+  background-color: var(--dark-green);
+}
