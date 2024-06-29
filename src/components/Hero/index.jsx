@@ -6,23 +6,23 @@ import ModelLoad from "../ModelLoad";
 import Home from "@mui/icons-material/Home";
 const carouselItems = [
   {
-    src: "/src/assets/c1.png",
+    src: "/c1.png",
     alt: "First slide",
   },
   {
-    src: "/src/assets/c2.png",
+    src: "/c2.png",
     alt: "Second slide",
   },
   {
-    src: "/src/assets/c3.png",
+    src: "/c3.png",
     alt: "Third slide",
   },
   {
-    src: "/src/assets/c4.png",
+    src: "/c4.png",
     alt: "Third slide",
   },
   {
-    src: "/src/assets/c5.png",
+    src: "/c5.png",
     alt: "Third slide",
   },
 ];
@@ -46,7 +46,7 @@ const Hero = () => {
               scene={false}
               height="500px"
               path="/models/steth/scene.gltf"
-              imagepath="/src/assets/imgs/steth.png"
+              imagepath="/steth.png"
               scale={1.2}
               rotation={[0, 0, -0.6]}
             />

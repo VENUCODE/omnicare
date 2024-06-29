@@ -18,7 +18,7 @@ const Plants = () => {
     {
       to: "/plants",
       path: "/models/land/scene.gltf",
-      img: "/src/assets/imgs/crop.jpg",
+      img: "/crop.jpg",
       scale: 1,
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
@@ -29,7 +29,7 @@ const Plants = () => {
     {
       to: "/plants",
       path: "/models/tropical_plant_2/scene.gltf",
-      img: "/src/assets/imgs/pdis.jpg",
+      img: "/pdis.jpg",
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
       scale: 3,
@@ -40,7 +40,7 @@ const Plants = () => {
     {
       to: "/plants",
       path: "/models/pplant/scene.gltf",
-      img: "/src/assets/imgs/cropid.jpg",
+      img: "/cropid.jpg",
       position: [0, -3, 0],
       rotation: [0.3, 0, 0],
       scale: 6,

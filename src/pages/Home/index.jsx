@@ -1,6 +1,5 @@
 import React from "react";
 import ModelLoad from "../../components/ModelLoad";
-import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -9,7 +8,7 @@ const Home = () => {
     {
       to: "/human",
       path: "/models/human_brain/scene.gltf",
-      img: "/src/assets/imgs/brain.png",
+      img: "/imgs/brain.png",
       scale: 5,
       position: [0, -1, 0],
       title: "Brain Tumor Detection",
@@ -19,7 +18,7 @@ const Home = () => {
     {
       to: "/human",
       path: "/models/realistic_human_heart/scene.gltf",
-      img: "/src/assets/imgs/heart.png",
+      img: "/imgs/heart.png",
       position: [0, 0, 0],
       scale: 3,
       title: "Heart Risk Prediction",
@@ -29,7 +28,7 @@ const Home = () => {
     {
       to: "/human",
       path: "/models/animal_cell/scene.gltf",
-      img: "/src/assets/imgs/animalcell.png",
+      img: "/imgs/animalcell.png",
       position: [0, 0.5, 0],
       scale: 0.6,
       title: "Disease Prediction",
@@ -40,7 +39,7 @@ const Home = () => {
     {
       to: "/human",
       path: "/models/lung/scene.gltf",
-      img: "/src/assets/imgs/lung.png",
+      img: "/imgs/lung.png",
       scale: 0.03,
       position: [0, -5, 0],
       animation: false,
@@ -54,7 +53,7 @@ const Home = () => {
     {
       to: "/plants",
       path: "/models/land/scene.gltf",
-      img: "/src/assets/imgs/animalcell.png",
+      img: "/crop.jpg",
       scale: 1,
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
@@ -65,7 +64,7 @@ const Home = () => {
     {
       to: "/plants",
       path: "/models/tropical_plant_2/scene.gltf",
-      img: "/src/assets/imgs/heart.png",
+      img: "/pdis.jpg",
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
       scale: 3,
@@ -76,7 +75,7 @@ const Home = () => {
     {
       to: "/plants",
       path: "/models/pplant/scene.gltf",
-      img: "/src/assets/imgs/animalcell.png",
+      img: "/cropid.jpg",
       position: [0, -3, 0],
       rotation: [0.3, 0, 0],
       scale: 6,
