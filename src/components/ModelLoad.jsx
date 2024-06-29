@@ -73,7 +73,7 @@ const ModelLoad = ({
         <Environment
           background={scene}
           backgroundBlurriness={0.08}
-          files={env ? "/src/assets/env.hdr" : "/src/assets/medow.hdr"}
+          files={env ? "/env.hdr" : "/medow.hdr"}
         />
 
         <Model
