@@ -36,11 +36,11 @@ function Navbar() {
                     Human
                   </Link>
                 </li>
-                {/* <li className="nav-item poppins-regular">
-                  <Link to="" className="nav-link">
+                <li className="nav-item poppins-regular">
+                  <Link to="/profile" className="nav-link">
                     profile
                   </Link>
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>

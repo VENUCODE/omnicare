@@ -36,7 +36,7 @@ const Model = ({
 
 const Controls = () => {
   const { camera, gl } = useThree();
-  return <orbitControls args={[camera, gl.domElement]} />;
+  return <orbitControls args={[camera, gl.domElement]} maxZoom={20} />;
 };
 
 const ModelLoad = ({
@@ -48,6 +48,7 @@ const ModelLoad = ({
   position,
   env,
   animation = true,
+  ...props
 }) => {
   return (
     <Suspense
@@ -68,10 +69,10 @@ const ModelLoad = ({
         </div>
       }
     >
-      <Canvas style={{ height: "300px", width: "100%" }}>
+      <Canvas style={{ height: "300px", width: "100%", ...props }}>
         <Environment
           background={scene}
-          backgroundBlurriness={1.4}
+          backgroundBlurriness={0.08}
           files={env ? "/src/assets/env.hdr" : "/src/assets/medow.hdr"}
         />
 
@@ -82,6 +83,7 @@ const ModelLoad = ({
           rotation={rotation}
           animation={animation}
         />
+
         <Controls />
       </Canvas>
     </Suspense>

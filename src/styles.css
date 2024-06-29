@@ -186,3 +186,38 @@ body::-webkit-scrollbar {
   background-color: black;
   background-blend-mode: screen;
 }
+
+.text-gradient-1 {
+  background: linear-gradient(67deg, rgb(8, 198, 116), green);
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-2 {
+  background: linear-gradient(67deg, rgb(0, 32, 7), green);
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-3 {
+  background: linear-gradient(67deg, black, red, black);
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grad-1 {
+  background: linear-gradient(67deg, rgb(8, 198, 116), green);
+  color: white;
+
+}
+
+.bg-grad-2 {
+  background: linear-gradient(67deg, rgb(0, 32, 7), green);
+  color: white;
+
+}
+
+.bg-grad-3 {
+  background: linear-gradient(67deg, black, red, black);
+  color: white;
+}

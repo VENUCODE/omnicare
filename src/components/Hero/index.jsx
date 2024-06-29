@@ -33,7 +33,7 @@ const Hero = () => {
         {carouselItems.map((item, index) => (
           <img
             key={index}
-            className="carousel-img"
+            className="carousel-img h-100"
             src={item.src}
             alt={item.alt}
           />
@@ -44,21 +44,20 @@ const Hero = () => {
           <div className="col-md-6 ">
             <ModelLoad
               scene={false}
+              height="500px"
               path="/models/steth/scene.gltf"
               imagepath="/src/assets/imgs/steth.png"
               scale={1.2}
             />
           </div>
-          <div className="col-md-6 row">
-            <div className=" col-12  container-fluid d-flex justify-content-center flex-column">
-              <div className="fs-1 poppins-bold bgblur">
-                <img src={logo} style={{ height: "6rem" }} />
-                <span className="tlg fs-1 ">MNI</span>
-                <span className="text-dark">CARE</span>
-              </div>
-              <div className="bgdark text-center poppins-semibold fs-3 d-flex justify-content-center align-items-center ">
-                Prognosis at your finger tip
-              </div>
+          <div className="col-md-6 container-fluid d-flex justify-content-center flex-column">
+            <div className="fs-1 poppins-bold bgblur">
+              <img src={logo} style={{ height: "6rem" }} />
+              <span className="tlg fs-1 ">MNI</span>
+              <span className="text-dark">CARE</span>
+            </div>
+            <div className="bgdark text-center poppins-semibold fs-3 d-flex justify-content-center align-items-center ">
+              Prognosis at your finger tip
             </div>
           </div>
         </div>

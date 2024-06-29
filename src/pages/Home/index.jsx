@@ -12,29 +12,29 @@ const Home = () => {
       img: "/src/assets/imgs/brain.png",
       scale: 5,
       position: [0, -1, 0],
-      title: "Brain turmor detection",
-      description: "Get result from the MRI image",
+      title: "Brain Tumor Detection",
+      description:
+        "Get results from MRI images for accurate brain tumor detection. Our advanced technology analyzes MRI scans to identify and diagnose brain tumors. Experience a new level of precision and reliability in medical imaging.",
     },
     {
       to: "/human",
       path: "/models/realistic_human_heart/scene.gltf",
       img: "/src/assets/imgs/heart.png",
       position: [0, -0.5, 0],
-
       scale: 4,
-      title: "Heart Risk prediction",
-      description: "Get your heart risk predition ",
+      title: "Heart Risk Prediction",
+      description:
+        "Predict your heart risk with our advanced tools. Understand potential heart risks with our predictive analysis. Our system evaluates your data to offer insights into your heart health. Stay ahead with preventive measures.",
     },
-
     {
       to: "/human",
       path: "/models/animal_cell/scene.gltf",
       img: "/src/assets/imgs/animalcell.png",
       position: [0, 0.5, 0],
-
       scale: 1,
-      title: "Disease prediction",
-      description: "Disease prediction from symptoms",
+      title: "Disease Prediction",
+      description:
+        "Predict diseases from symptoms using our model. Our system identifies potential diseases based on your symptoms. Gain quick and reliable health insights. Early detection can lead to better health outcomes.",
       rotation: [45, 0, 0],
     },
     {
@@ -44,10 +44,12 @@ const Home = () => {
       scale: 0.03,
       position: [0, -5, 0],
       animation: false,
-      title: "Pneumonia prediction",
-      description: "Disease prediction from symptoms",
+      title: "Pneumonia Prediction",
+      description:
+        "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
     },
   ];
+
   const plantitems = [
     {
       to: "/plants",
@@ -56,10 +58,10 @@ const Home = () => {
       scale: 1,
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
-      title: "Crop recommendition",
-      description: "crop recomendition based on soil prediction",
+      title: "Crop Recommendation",
+      description:
+        "Receive crop recommendations based on soil data. Our system analyzes soil to suggest the best crops. Enhance your agricultural yield with tailored advice. Ensure optimal crop selection for your soil type.",
     },
-
     {
       to: "/plants",
       path: "/models/tropical_plant_2/scene.gltf",
@@ -67,10 +69,10 @@ const Home = () => {
       position: [0, -2, 0],
       rotation: [0.3, 0, 0],
       scale: 3,
-      title: "Plant disease prediction",
-      description: "Identify crop disease based on crop leaf image ",
+      title: "Plant Disease Prediction",
+      description:
+        "Identify plant diseases from leaf images accurately. Our technology helps in early disease detection. Protect your crops with timely intervention. Ensure healthy plant growth with precise diagnostics.",
     },
-
     {
       to: "/plants",
       path: "/models/pplant/scene.gltf",
@@ -78,10 +80,12 @@ const Home = () => {
       position: [0, -3, 0],
       rotation: [0.3, 0, 0],
       scale: 6,
-      title: "Plant identification",
-      description: "Disease prediction from symptoms",
+      title: "Plant Identification",
+      description:
+        "Identify plants and predict diseases from symptoms. Our model provides accurate plant identification. Understand plant health and potential issues. Improve plant care with our diagnostic tools.",
     },
   ];
+
   return (
     <div className="container-fluid d-flex flex-column gap-3">
       <Grid container spacing={3}>
@@ -92,29 +96,31 @@ const Home = () => {
         </Grid>
         {humanitems.map((model, index) => (
           <Grid item xs={12} md={6} key={index}>
-            <Card className="d-flex flex-row">
-              <CardMedia className="flex-grow-1">
+            <Card className="row shadow-none shadow">
+              <CardMedia className="col-md-6 col-12 ">
                 <ModelLoad
                   path={model.path}
                   scale={model.scale}
                   position={model.position}
                   imagepath={model.img}
-                  scene={false}
+                  scene={true}
                   animation={model.animation}
                   rotation={model.rotation}
                   env={true}
                 />
               </CardMedia>
-              <CardContent className="flex-grow-1 d-flex flex-column justify-content-center gap-2">
+              <CardContent className="col-md-6 col-12  d-flex flex-column justify-content-between ">
                 <div>
-                  <p className="poppins-bold mb-0 fs-4">{model.title}</p>
+                  <p className="poppins-bold mb-0 fs-4 text-gradient-3">
+                    {model.title}
+                  </p>
                   <Typography variant="body2" color="text.secondary">
                     {model.description}
                   </Typography>
                 </div>
                 <Link
                   to={model.to}
-                  className="w-maxcontent text-decoration-none text-danger bg-transparent poppins-regular text-start border-0 "
+                  className="w-maxcontent px-2 bg-grad-3 text-decoration-none text-gradient-3 poppins-regular text-start border-0 "
                 >
                   Get prognosis
                 </Link>
@@ -131,29 +137,31 @@ const Home = () => {
         </Grid>
         {plantitems.map((model, index) => (
           <Grid item xs={12} md={6} key={index}>
-            <Card className="d-flex flex-row">
-              <CardMedia className="flex-grow-1">
+            <Card className="row shadow-none shadow ">
+              <CardMedia className=" col-md-6 col-12">
                 <ModelLoad
                   path={model.path}
                   scale={model.scale}
                   position={model.position}
                   imagepath={model.img}
-                  scene={false}
+                  scene={true}
                   env={false}
                   animation={model.animation}
                   rotation={model.rotation}
                 />
               </CardMedia>
-              <CardContent className="flex-grow-1 d-flex flex-column justify-content-center gap-2">
+              <CardContent className=" col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
                 <div>
-                  <p className="poppins-bold mb-0 fs-4">{model.title}</p>
+                  <p className="poppins-bold mb-0 fs-4 text-gradient-2">
+                    {model.title}
+                  </p>
                   <Typography variant="body2" color="text.secondary">
                     {model.description}
                   </Typography>
                 </div>
                 <Link
                   to={model.to}
-                  className="w-maxcontent text-decoration-none text-danger bg-transparent poppins-regular text-start border-0 "
+                  className=" text-gradient-2 w-maxcontent bg-grad-1 text-decoration-none  poppins-regular text-start border-0 "
                 >
                   Get prognosis
                 </Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import Hero from "../Hero";
+import Home from "../../pages/Home";
 import Team from "../Team";
 const LandingPage = () => {
   return (
@@ -8,7 +9,12 @@ const LandingPage = () => {
       <div>
         <Hero />
       </div>
-      <div className="container-fluid px-0 mx-0 mt-2">{/* <Team /> */}</div>
+      <div>
+        <Home />
+      </div>
+      <div>
+        <Team />
+      </div>
     </div>
   );
 };

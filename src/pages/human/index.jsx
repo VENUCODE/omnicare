@@ -2,11 +2,7 @@
 import React from "react";
 import SectionCard from "../../components/Landing sections/SectionCard";
 const Human = () => {
-  return (
-    <div>
-      <SectionCard />
-    </div>
-  );
+  return <div>Human page</div>;
 };
 
 export default Human;
