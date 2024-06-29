@@ -157,9 +157,32 @@ body::-webkit-scrollbar {
 }
 
 .model-bg {
-  background: url("./assets/blood.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  backdrop-filter: blur(10px);
+}
+
+.model-bg.one {
+  background: url("./assets/c1.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.model-bg.two {
+  background: url("./assets/c2.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.model-bg.three {
+  background: url("./assets/c3.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bg-blood {
+  background: url("./assets/blood.jpg");
+  background-size: cover;
+  background-attachment: scroll;
+  background-color: black;
+  background-blend-mode: screen;
 }

@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 
 export default function App() {
   return (
-    <div>
+    <div className="p-0 m-0">
       <Navbar />
       <LandingPage />
       <Home />

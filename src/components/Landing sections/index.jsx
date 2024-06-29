@@ -8,9 +8,7 @@ const LandingPage = () => {
       <div>
         <Hero />
       </div>
-      <div className="container-fluid px-0 mx-0 mt-2">
-        <Team />
-      </div>
+      <div className="container-fluid px-0 mx-0 mt-2">{/* <Team /> */}</div>
     </div>
   );
 };

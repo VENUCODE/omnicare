@@ -2,25 +2,34 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import "./hero.css";
 import logo from "../../assets/omnicarelogo.svg";
-
+import ModelLoad from "../ModelLoad";
+import Home from "@mui/icons-material/Home";
 const carouselItems = [
   {
-    src: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/src/assets/c1.png",
     alt: "First slide",
   },
   {
-    src: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/src/assets/c2.png",
     alt: "Second slide",
   },
   {
-    src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "/src/assets/c3.png",
+    alt: "Third slide",
+  },
+  {
+    src: "/src/assets/c4.png",
+    alt: "Third slide",
+  },
+  {
+    src: "/src/assets/c5.png",
     alt: "Third slide",
   },
 ];
 const Hero = () => {
   return (
     <div className="hero-container">
-      <Carousel>
+      <Carousel ndicatorIcon={<Home />}>
         {carouselItems.map((item, index) => (
           <img
             key={index}
@@ -30,17 +39,27 @@ const Hero = () => {
           />
         ))}
       </Carousel>
-      <div className="container row px-0 foreground-content">
+      <div className="container-fluid d-flex justify-content-center row  foreground-content">
         <div className="row col-6-md col-12">
-          <div className="col-md-6 col-12 bgblur">
-            <div className="fs-1 poppins-bold ">
-              <img src={logo} style={{ height: "6rem" }} />
-              <span className="tlg fs-1 ">MNI</span>
-              <span className="text-dark">CARE</span>
-            </div>
+          <div className="col-md-6 ">
+            <ModelLoad
+              scene={false}
+              path="/models/steth/scene.gltf"
+              imagepath="/src/assets/imgs/steth.png"
+              scale={1.2}
+            />
           </div>
-          <div className="col-md-6  col-12 bgdark text-center poppins-semibold fs-3 d-flex justify-content-center align-items-center ">
-            Prognosis at your finger tip
+          <div className="col-md-6 row">
+            <div className=" col-12  container-fluid d-flex justify-content-center flex-column">
+              <div className="fs-1 poppins-bold bgblur">
+                <img src={logo} style={{ height: "6rem" }} />
+                <span className="tlg fs-1 ">MNI</span>
+                <span className="text-dark">CARE</span>
+              </div>
+              <div className="bgdark text-center poppins-semibold fs-3 d-flex justify-content-center align-items-center ">
+                Prognosis at your finger tip
+              </div>
+            </div>
           </div>
         </div>
       </div>

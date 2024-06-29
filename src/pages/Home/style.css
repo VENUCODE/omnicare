@@ -1,0 +1,21 @@
+.drop-corner::before {
+    content: "";
+    height: 20px;
+    width: 40px;
+    position: absolute;
+    background-color: inherit;
+    bottom: 0;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    left: -40px;
+}
+
+.drop-corner::after {
+    content: "";
+    height: 20px;
+    width: 40px;
+    position: absolute;
+    background-color: inherit;
+    clip-path: polygon(0 5%, 0 100%, 100% 100%);
+    bottom: 0;
+    right: -40px;
+}
