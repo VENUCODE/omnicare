@@ -1,8 +1,8 @@
 import React from "react";
 import ModelLoad from "../../components/ModelLoad";
 import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { Button } from "antd";
 import { Link } from "react-router-dom";
+import "./style.css";
 
 const Home = () => {
   const humanitems = [
@@ -20,8 +20,8 @@ const Home = () => {
       to: "/human",
       path: "/models/realistic_human_heart/scene.gltf",
       img: "/src/assets/imgs/heart.png",
-      position: [0, -0.5, 0],
-      scale: 4,
+      position: [0, 0, 0],
+      scale: 3,
       title: "Heart Risk Prediction",
       description:
         "Predict your heart risk with our advanced tools. Understand potential heart risks with our predictive analysis. Our system evaluates your data to offer insights into your heart health. Stay ahead with preventive measures.",
@@ -31,11 +31,11 @@ const Home = () => {
       path: "/models/animal_cell/scene.gltf",
       img: "/src/assets/imgs/animalcell.png",
       position: [0, 0.5, 0],
-      scale: 1,
+      scale: 0.6,
       title: "Disease Prediction",
       description:
         "Predict diseases from symptoms using our model. Our system identifies potential diseases based on your symptoms. Gain quick and reliable health insights. Early detection can lead to better health outcomes.",
-      rotation: [45, 0, 0],
+      rotation: [33, 0, 0],
     },
     {
       to: "/human",
@@ -87,89 +87,47 @@ const Home = () => {
   ];
 
   return (
-    <div className="container-fluid d-flex flex-column gap-3">
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <h3 className="poppins-semibold w-maxcontent px-3 rounded-5 mx-auto bg-dark-subtle text-center ">
-            Human Prognosis
-          </h3>
-        </Grid>
-        {humanitems.map((model, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <Card className="row shadow-none shadow">
-              <CardMedia className="col-md-6 col-12 ">
+    <div className="container-fluid d-flex flex-column gap-3 pt-2">
+      <div className="bg-white">
+        <h2 className="text-gradient-3 poppins-bold w-maxcontent mx-auto ">
+          Explore our services
+        </h2>
+      </div>
+      <div class="marquee-container">
+        <marquee
+          className="marquee"
+          width="100%"
+          behavior="alternate"
+          direction="left"
+          height="auto"
+          scrollamount="5"
+        >
+          <div className="d-flex flex-row gap-3">
+            {[...humanitems, ...plantitems].map((model, index) => (
+              <div className="" key={index}>
                 <ModelLoad
                   path={model.path}
                   scale={model.scale}
                   position={model.position}
                   imagepath={model.img}
-                  scene={true}
-                  animation={model.animation}
+                  scene={false}
+                  animation={false}
                   rotation={model.rotation}
-                  env={true}
-                />
-              </CardMedia>
-              <CardContent className="col-md-6 col-12  d-flex flex-column justify-content-between ">
-                <div>
-                  <p className="poppins-bold mb-0 fs-4 text-gradient-3">
-                    {model.title}
-                  </p>
-                  <Typography variant="body2" color="text.secondary">
-                    {model.description}
-                  </Typography>
-                </div>
-                <Link
-                  to={model.to}
-                  className="w-maxcontent px-2 bg-grad-3 text-decoration-none text-gradient-3 poppins-regular text-start border-0 "
-                >
-                  Get prognosis
-                </Link>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <h3 className="poppins-semibold w-maxcontent px-3 rounded-5 mx-auto bg-dark-subtle text-center ">
-            Plant prognosis
-          </h3>
-        </Grid>
-        {plantitems.map((model, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <Card className="row shadow-none shadow ">
-              <CardMedia className=" col-md-6 col-12">
-                <ModelLoad
-                  path={model.path}
-                  scale={model.scale}
-                  position={model.position}
-                  imagepath={model.img}
-                  scene={true}
                   env={false}
-                  animation={model.animation}
-                  rotation={model.rotation}
+                  backgroundColor="white"
                 />
-              </CardMedia>
-              <CardContent className=" col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
-                <div>
-                  <p className="poppins-bold mb-0 fs-4 text-gradient-2">
+                <Link to={model.to} className="text-decoration-none">
+                  <p className="bg-dark text-light poppins-medium text-center">
                     {model.title}
                   </p>
-                  <Typography variant="body2" color="text.secondary">
-                    {model.description}
-                  </Typography>
-                </div>
-                <Link
-                  to={model.to}
-                  className=" text-gradient-2 w-maxcontent bg-grad-1 text-decoration-none  poppins-regular text-start border-0 "
-                >
-                  Get prognosis
                 </Link>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              </div>
+            ))}
+          </div>
+        </marquee>
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,16 @@
 import React from "react";
 import "./team.css";
 const TeamCard = ({ data }) => {
-  const { name, id, title } = data;
+  const {
+    name,
+    id,
+    title,
+    img = "https://picsum.photos/200/300?random=2",
+  } = data;
   return (
-    <div className="card  d-flex">
+    <div className="card  d-flex  border-0 my-2 shadow">
       <div className="img-bx position-relative">
-        <img src="https://i.postimg.cc/dQ7zWbS5/img-4.jpg" alt="img" />
+        <img src={img} alt="img" />
       </div>
       <div className="content position-relative">
         <div className="detail">

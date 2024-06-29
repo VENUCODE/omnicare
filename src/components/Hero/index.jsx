@@ -48,6 +48,7 @@ const Hero = () => {
               path="/models/steth/scene.gltf"
               imagepath="/src/assets/imgs/steth.png"
               scale={1.2}
+              rotation={[0, 0, -0.6]}
             />
           </div>
           <div className="col-md-6 container-fluid d-flex justify-content-center flex-column">

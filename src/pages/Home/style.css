@@ -1,21 +1,60 @@
-.drop-corner::before {
-    content: "";
-    height: 20px;
-    width: 40px;
-    position: absolute;
-    background-color: inherit;
-    bottom: 0;
-    clip-path: polygon(100% 0, 0 100%, 100% 100%);
-    left: -40px;
+.bg-grad-danger {
+    background: linear-gradient(67deg, rgba(255, 0, 0, 0.247), transparent) !important;
 }
 
-.drop-corner::after {
+.bg-grad-sc {
+    background: linear-gradient(67deg, rgba(81, 255, 0, 0.247), transparent) !important;
+}
+
+.bg-grad-success {
+    position: relative;
+    background: linear-gradient(67deg, rgba(81, 255, 0, 0.247), white, rgba(81, 255, 0, 0.247)) !important;
+}
+
+.bg-grad-success::before {
     content: "";
-    height: 20px;
-    width: 40px;
     position: absolute;
-    background-color: inherit;
-    clip-path: polygon(0 5%, 0 100%, 100% 100%);
-    bottom: 0;
-    right: -40px;
+    height: 5px;
+    width: 110%;
+    bottom: -15px;
+    left: -5%;
+    background-color: green;
+    z-index: -1;
+}
+
+
+.bg-grad-dng {
+    background: linear-gradient(67deg, rgba(255, 0, 0, 0.247), white, rgba(255, 0, 0, 0.247)) !important;
+}
+
+.marquee-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.fade-left,
+.fade-right {
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--body-bg), var(--body-bg), transparent);
+}
+
+.fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--body-bg), var(--body-bg), transparent);
 }

@@ -49,7 +49,8 @@ function Navbar() {
       {isSmallDevice && (
         <div className="fixed-bottom w-75 mx-auto bgblur d-flex justify-content-between my-2 px-3 py-1 rounded-5 gap-2 align-items-center">
           <div className="w-auto d-flex justify-content-center align-items-center">
-            <span
+            <Link
+              to="/"
               className={`icon-container p-2 rounded-circle ${
                 active === "home" ? "icon-container-active" : "bg-dark"
               }`}
@@ -61,10 +62,11 @@ function Navbar() {
                   setActive("home");
                 }}
               />
-            </span>
+            </Link>
           </div>
           <div className="w-auto gap-4 position-relative bg-dark d-flex flex-row w-maxcontent px-4 rounded-5">
-            <span
+            <Link
+              to="/plants"
               className={`icon-container p-2 rounded-circle ${
                 active === "plant" ? "icon-container-active" : "bg-dark"
               }`}
@@ -76,8 +78,9 @@ function Navbar() {
                   setActive("plant");
                 }}
               />
-            </span>
-            <span
+            </Link>
+            <Link
+              to="/human"
               className={`icon-container p-2 rounded-circle ${
                 active === "human" ? "icon-container-active" : "bg-dark"
               }`}
@@ -89,10 +92,11 @@ function Navbar() {
                   setActive("human");
                 }}
               />
-            </span>
+            </Link>
           </div>
           <div className="w-auto d-flex justify-content-center align-items-center">
-            <span
+            <Link
+              to="/profile"
               className={`icon-container p-2 rounded-circle ${
                 active === "profile" ? "icon-container-active" : "bg-dark"
               }`}
@@ -106,7 +110,7 @@ function Navbar() {
                   setActive("profile");
                 }}
               />
-            </span>
+            </Link>
           </div>
         </div>
       )}

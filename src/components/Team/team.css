@@ -9,6 +9,9 @@
     backdrop-filter: blur(15px) !important;
 }
 
+.card:hover .img-bx {
+    transform: scale(0.7);
+}
 
 .img-bx {
     position: absolute;
@@ -20,6 +23,7 @@
     overflow: hidden;
     transform: translateY(30px) scale(0.5);
     transform-origin: top;
+    transition: transform 1s ease;
 }
 
 .img-bx img {

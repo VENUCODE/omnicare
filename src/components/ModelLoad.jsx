@@ -36,7 +36,7 @@ const Model = ({
 
 const Controls = () => {
   const { camera, gl } = useThree();
-  return <orbitControls args={[camera, gl.domElement]} maxZoom={20} />;
+  return <orbitControls args={[camera, gl.domElement]} enableZoom={false} />;
 };
 
 const ModelLoad = ({
