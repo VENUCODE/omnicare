@@ -1,6 +1,8 @@
 import React from "react";
 import DiabeticSymptomForm from "./DiabeticSymptomForm";
-import { Alert } from "rsuite";
+import { Alert, AlertTitle } from "@mui/material";
+import { message } from "antd";
+
 const DiabeticPrediction = () => {
   const getDiabeticPredict = (inputValues) => {
     fetch("http://127.0.0.1:5000/diabeticPredict", {
@@ -10,21 +12,22 @@ const DiabeticPrediction = () => {
       },
       body: JSON.stringify({ inputValues }),
     })
-      .then(function (response) {
+      .then((response) => {
         if (!response.ok) {
           console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(function (data) {
+      .then((data) => {
         console.log(data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
-        Alert.error(error.message, 2000);
+        message.error(error.message, 2);
       });
   };
+
   return (
     <div>
       <DiabeticSymptomForm getDiabeticPredict={getDiabeticPredict} />

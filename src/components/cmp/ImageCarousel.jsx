@@ -1,26 +1,12 @@
-// ImageCarousel.jsx
-import React from "react";
+import React, { Children } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./imageCarousel.css";
 
-const CustomDot = ({ onClick, active }) => (
-  <li>
-    <button
-      className={`custom-dot ${active ? "custom-dot-active" : ""}`}
-      onClick={onClick}
-    />
-  </li>
-);
-
-const ImageCarousel = ({
-  children,
-  noOfSlides = 1,
-  className = "",
-  ...props
-}) => {
+const ImageCarousel = ({ children, noOfSlides, ...props }) => {
   const settings = {
+    className: "center",
     dots: true,
     infinite: true,
     speed: 4000,
@@ -30,15 +16,12 @@ const ImageCarousel = ({
     autoplaySpeed: 0,
     swipeToSlide: true,
     centerMode: true,
+    swippable: true,
     draggable: true,
-    centerPadding: "0px",
+    pauseOnHover: true,
+    variableWidth: true,
     ...props,
-    appendDots: (dots) => (
-      <div>
-        <ul style={{ margin: "0px" }}> {dots} </ul>
-      </div>
-    ),
-    customPaging: (i) => <CustomDot />,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -49,7 +32,7 @@ const ImageCarousel = ({
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
         },
       },
       {
@@ -62,10 +45,8 @@ const ImageCarousel = ({
   };
 
   return (
-    <div className={`container-fluid w-100 my-4 ${className}`}>
-      <Slider {...settings} className="container">
-        {children}
-      </Slider>
+    <div className="slider-container">
+      <Slider {...settings}>{children}</Slider>
     </div>
   );
 };

@@ -1,14 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Form,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  HelpBlock,
-  Button,
-  Schema,
-  Alert,
-} from "rsuite";
+import React, { useRef, useState } from "react";
+import { Button, Form, Input, message } from "antd";
+import { Container, Typography } from "@mui/material";
+
 const markUpdata = [
   {
     label: "Pregnancies",
@@ -71,70 +64,63 @@ const INITIAL_FORM = {
   DiabetesPedigreeFunction: 0,
   Age: 0,
 };
+
 const DiabeticSymptomForm = ({ getDiabeticPredict }) => {
-  const { NumberType } = Schema.Types;
-  const formSchema = {
-    Pregnancies: NumberType().isRequired("Pregnancies should be a number"),
-    Glucose: NumberType().isRequired("Glucose should be a number"),
-    BloodPressure: NumberType().isRequired("Blood Pressure should be a number"),
-    SkinThickness: NumberType().isRequired("Skin Thickness should be a number"),
-    Insulin: NumberType()
-      .isRequired("Insulin should be a number")
-      .range(0, 880, "Insulin should be between 0 and 880"),
-    BodyMassIndex: NumberType().isRequired(
-      "Body Mass Index should be a number"
-    ),
-    DiabetesPedigreeFunction: NumberType()
-      .isRequired("Diabetes Pedigree Function should be a number")
-      .range(0, 3, "Diabetes Pedigree Function should be between 0 and 3"),
-    Age: NumberType()
-      .isRequired("Age should be a number")
-      .range(0, 200, "Age should be between 0 and 200"),
-  };
-  const userModel = Schema.Model(formSchema);
-  const formRef = useRef();
-  const onSubmit = async (schemaCheck, event) => {
-    if (!formRef.current.check()) {
-      return Alert.info("Form is invalid", 2000);
-    } else {
-      await getDiabeticPredict(
-        Object.values(formValue).map((value, index) =>
-          index === 6 ? parseFloat(value) : parseInt(value, 10)
-        )
-      );
-    }
-  };
+  const formRef = useRef(null);
   const [formValue, setFormValue] = useState(INITIAL_FORM);
-  const handleFormValueChagne = (value) => {
-    setFormValue({
-      ...formValue,
-      ...value,
-    });
+
+  const handleFormValueChange = (changedValues, allValues) => {
+    setFormValue(allValues);
+  };
+
+  const onSubmit = async (e) => {
+    try {
+      const values = await formRef.current.validateFields();
+      if (Object.values(values)) {
+        message.info("Enter valid values");
+        return;
+      }
+      console.log(values);
+      // await getDiabeticPredict(
+      //   Object.values(values).map((value, index) =>
+      //     index === 6 ? parseFloat(value) : parseInt(value, 10)
+      //   )
+      // );
+    } catch (error) {
+      message.error("Form is invalid");
+    }
   };
 
   return (
-    <div className="p-4">
-      <Form model={userModel} ref={formRef} onChange={handleFormValueChagne}>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Diabetic Symptom Form
+      </Typography>
+      <Form
+        ref={formRef}
+        onSubmit={onSubmit}
+        initialValues={INITIAL_FORM}
+        onValuesChange={handleFormValueChange}
+      >
         {markUpdata.map((item, index) => (
-          <FormGroup key={index}>
-            <ControlLabel>{item.label}</ControlLabel>
-            <FormControl name={item.name} placeholder={item.placeholder} />
-            <HelpBlock tooltip>{item.tooltip}</HelpBlock>
-          </FormGroup>
-        ))}
-        <FormGroup>
-          <Button
-            appearance="default"
-            type="submit"
-            onClick={onSubmit}
-            color="red"
-            placeholder="Get Prognosis"
+          <Form.Item
+            key={index}
+            name={item.name}
+            required
+            rules={[{ required: true, message: item.tooltip }]}
+            label={item.label}
+            tooltip={item.tooltip}
           >
+            <Input placeholder={item.placeholder} />
+          </Form.Item>
+        ))}
+        <Form.Item>
+          <Button type="primary" block>
             Get Prognosis
           </Button>
-        </FormGroup>
+        </Form.Item>
       </Form>
-    </div>
+    </Container>
   );
 };
 

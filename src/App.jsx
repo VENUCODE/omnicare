@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, Suspense } from "react";
+import React, { useEffect, useMemo, Suspense, useState } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/Landing sections";
@@ -6,15 +6,31 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./styles.css";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import TempCard from "./components/TempCard";
+import { CSSTransition } from "react-transition-group";
+import "./transitionStyle.css";
 
-// Lazy load components
 const LazyComponent = (factory) => {
   const Component = React.lazy(factory);
-  return (props) => (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Component {...props} />
-    </Suspense>
-  );
+  return (props) => {
+    const [inProp, setInProp] = useState(false);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setInProp(true);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    return (
+      <Suspense fallback={<TempCard count={6} />}>
+        <CSSTransition in={inProp} timeout={1000} classNames="fade">
+          <Component {...props} />
+        </CSSTransition>
+      </Suspense>
+    );
+  };
 };
 
 const Human = LazyComponent(() => import("./pages/human"));

@@ -134,13 +134,6 @@ const Plants = () => {
             {selectedItem.title === "Plant Identification" && (
               <input type="text" placeholder="Enter plant symptoms" />
             )}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleCloseModal}
-            >
-              Close
-            </Button>
           </div>
         )}
       </Modal>

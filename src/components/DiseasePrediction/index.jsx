@@ -1,13 +1,13 @@
 import React from "react";
 import SymptomsForm from "./SymptomsForm";
-import { Alert } from "rsuite";
+import { message } from "antd";
 
 const DiseasePred = () => {
   const getPrediction = (symptoms) => {
     fetch("http://127.0.0.1:5000/diseasePredict", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ symptoms }),
     })
@@ -23,7 +23,7 @@ const DiseasePred = () => {
       })
       .catch(function (error) {
         console.log(error);
-        Alert.error(error.message, 2000);
+        message.error(error.message, 2000);
       });
   };
   return (

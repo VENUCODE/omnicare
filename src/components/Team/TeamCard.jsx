@@ -1,5 +1,4 @@
 import React from "react";
-import "./team.css";
 const TeamCard = ({ data }) => {
   const {
     name,
@@ -8,17 +7,24 @@ const TeamCard = ({ data }) => {
     img = "https://picsum.photos/200/300?random=2",
   } = data;
   return (
-    <div className="card  d-flex  border-0 my-2 shadow">
-      <div className="img-bx position-relative">
-        <img src={img} alt="img" />
-      </div>
-      <div className="content position-relative">
-        <div className="detail">
-          <h2 className="poppins-bold text-capitalize text-gradient-1">
-            {name}
-          </h2>
-          <p className="poppins-medium ">{id}</p>
-          <p className="text-center poppins-regular ">{title}</p>
+    <div className="slide">
+      <div className="m-1">
+        <div className="w-maxcontent content bg-white">
+          <div className="col-12 ">
+            <img
+              src={img}
+              alt="img"
+              style={{
+                height: "100px",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+          <div className="col-12 d-flex flex-column justify-content-center align-items-center gap-0 py-2">
+            <p className="poppins-bold my-0 pt-2 text-gradient-1">{name}</p>
+            <p className="poppins-medium my-0 pt-2 text-gradient-1">{id}</p>
+            <p className="poppins-regular my-0 pt-2 text-gradient-1">{title}</p>
+          </div>
         </div>
       </div>
     </div>

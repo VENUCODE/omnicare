@@ -9,6 +9,9 @@ import {
 } from "@mui/material";
 import ModelLoad from "../../components/ModelLoad";
 import Modal from "../../components/Modal";
+import DiseasePred from "../../components/DiseasePrediction";
+import BrainTumorForm from "../../components/BrainTumor";
+import DiabeticPrediction from "../../components/DiabeticPrediction";
 
 const Human = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,7 +21,7 @@ const Human = () => {
     {
       to: "/human",
       path: "/models/human_brain/scene.gltf",
-      img: "/src/assets/imgs/brain.png",
+      img: "/imgs/brain.png",
       scale: 5,
       position: [0, -1, 0],
       title: "Brain Tumor Detection",
@@ -28,7 +31,7 @@ const Human = () => {
     {
       to: "/human",
       path: "/models/realistic_human_heart/scene.gltf",
-      img: "/src/assets/imgs/heart.png",
+      img: "/imgs/heart.png",
       position: [0, -0.5, 0],
       scale: 4,
       title: "Heart Risk Prediction",
@@ -38,7 +41,7 @@ const Human = () => {
     {
       to: "/human",
       path: "/models/animal_cell/scene.gltf",
-      img: "/src/assets/imgs/animalcell.png",
+      img: "/imgs/animalcell.png",
       position: [0, 0.5, 0],
       scale: 1,
       title: "Disease Prediction",
@@ -49,13 +52,23 @@ const Human = () => {
     {
       to: "/human",
       path: "/models/lung/scene.gltf",
-      img: "/src/assets/imgs/lung.png",
+      img: "/imgs/lung.png",
       scale: 0.03,
       position: [0, -5, 0],
       animation: false,
       title: "Pneumonia Prediction",
       description:
         "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
+    },
+    {
+      to: "/human",
+      path: "/models/diabetic/scene.gltf",
+      scale: 8,
+      position: [0, 0, 0],
+      animation: true,
+      title: "diabetic Prediction",
+      description:
+        "Assess your risk of diabetes with our tool. Our model evaluates key parameters to help in early detection and diagnosis. Get accurate results to start timely preventive measures. Protect your health with advanced technology.",
     },
   ];
 
@@ -103,7 +116,7 @@ const Human = () => {
               <CardContent className="bg-white col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
                 <div>
                   <p
-                    className="poppins-bold mb-0 fs-4 text-gradient-2"
+                    className="poppins-bold mb-0 fs-4 text-gradient-2 text-capitalize"
                     data-aos="zoom-in"
                   >
                     {model.title}
@@ -137,26 +150,23 @@ const Human = () => {
       >
         {selectedItem && (
           <div>
-            {/* Example of conditional rendering based on selectedItem */}
             {selectedItem.title === "Brain Tumor Detection" && (
-              <input type="text" placeholder="Enter MRI scan details" />
+              <BrainTumorForm />
+            )}
+            {selectedItem.title === "diabetic Prediction" && (
+              <DiabeticPrediction />
+            )}
+            {selectedItem.title === "Disease Prediction" && (
+              <div className="contianer">
+                <DiseasePred />
+              </div>
             )}
             {selectedItem.title === "Heart Risk Prediction" && (
               <input type="text" placeholder="Enter heart data" />
             )}
-            {selectedItem.title === "Disease Prediction" && (
-              <input type="text" placeholder="Enter symptoms" />
-            )}
             {selectedItem.title === "Pneumonia Prediction" && (
               <input type="text" placeholder="Enter respiratory data" />
             )}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleCloseModal}
-            >
-              Close
-            </Button>
           </div>
         )}
       </Modal>

@@ -3,7 +3,6 @@ import Carousel from "react-material-ui-carousel";
 import "./hero.css";
 import logo from "../../assets/omnicarelogo.svg";
 import ModelLoad from "../ModelLoad";
-import Home from "@mui/icons-material/Home";
 const carouselItems = [
   {
     src: "/c1.png",
@@ -28,12 +27,12 @@ const carouselItems = [
 ];
 const Hero = () => {
   return (
-    <div className="hero-container">
-      <Carousel ndicatorIcon={<Home />}>
+    <div className="hero-container ">
+      <Carousel indicators={false} style={{ height: "100vh" }}>
         {carouselItems.map((item, index) => (
           <img
             key={index}
-            className="carousel-img h-100"
+            className="h-100 w-100 "
             src={item.src}
             alt={item.alt}
           />
@@ -44,7 +43,7 @@ const Hero = () => {
           <div className="col-md-6 ">
             <ModelLoad
               scene={false}
-              height="500px"
+              height="400px"
               path="/models/steth/scene.gltf"
               imagepath="/steth.png"
               scale={1.2}
