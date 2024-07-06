@@ -9,6 +9,7 @@ import {
   Skeleton,
 } from "antd";
 import { symptoms } from "../../data/DiseaseData";
+import { endpoints, prediction } from "../../endpoints";
 
 const formattedSymptoms = symptoms.map((symptom) => ({
   label: symptom.replace(/_/g, " ").toUpperCase(),
@@ -61,87 +62,95 @@ const getRandomPaleColor = () => {
 
   return colors[Math.floor(Math.random() * colors.length)];
 };
-const SymptomsForm = ({ getPrediction }) => {
-  // State variables
+
+const SymptomsForm = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [currentSymp, setCurrentSymp] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [predictionResult, setPredictionResult] = useState(null);
 
   const removeSymptom = (symp) => {
     setSelectedSymptoms((prevSymptoms) =>
-      prevSymptoms.filter((value, i) => value.value !== symp)
+      prevSymptoms.filter((value) => value.value !== symp)
     );
   };
 
-  // const handlePrediction = async () => {
-  //   try {
-  //     setLoading(true);
-  //     setTimeout(() => {}, 1000);
-  //     // await getPrediction(selectedSymptoms.map((symptom) => symptom.value));
-  //   } catch (err) {
-  //     console.log("error");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  const handlePrediction = async () => {
+  const getPrediction = async () => {
     try {
       setLoading(true);
+      console.log(selectedSymptoms.map((symptom) => symptom.value));
+      const response = await fetch(prediction + endpoints.diseasePredH, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          symptoms: selectedSymptoms.map((symptom) => symptom.value),
+        }),
+      });
 
-      // Simulate a delay with a Promise
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-      // Perform the prediction (uncomment in actual use)
-      // await getPrediction(selectedSymptoms.map((symptom) => symptom.value));
-    } catch (err) {
-      console.log("error");
+      const data = await response.json();
+      console.log(data);
+      setPredictionResult(data.prediction);
+    } catch (error) {
+      console.error("Error getting prediction:", error);
+      message.error(error.message, 1000);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleClear = () => {
+    setPredictionResult(null);
+    setSelectedSymptoms([]);
+  };
+
   return (
     <div className="bg-white p-3">
-      <div className="d-flex">
-        <AutoComplete
-          options={formattedSymptoms}
-          value={currentSymp}
-          size="large"
-          onSelect={(value, option) => {
-            console.log({ value, option });
-            if (
-              !selectedSymptoms.some(
-                (symptom) => symptom.value === option.value
-              )
-            ) {
-              setSelectedSymptoms((prev) => [option, ...prev]);
-            } else {
-              message.info(`${option.label} already selected`, 1);
-            }
-
-            setCurrentSymp(null);
-          }}
-          onChange={(value) => setCurrentSymp(value)}
-          style={{ flex: 1 }}
-        >
-          <Input
-            placeholder="Select Symptom"
-            className="rounded-0 "
-            onPressEnter={() => setCurrentSymp(null)}
-          />
-        </AutoComplete>
-        <Button
-          type="primary"
-          className="rounded-0"
-          onClick={handlePrediction}
-          loading={loading}
-          disabled={!selectedSymptoms.length || loading}
-        >
-          Get prognosis
-        </Button>
-      </div>
+      {!predictionResult && (
+        <div className="d-flex">
+          <AutoComplete
+            options={formattedSymptoms}
+            value={currentSymp}
+            size="large"
+            onSelect={(value, option) => {
+              if (
+                !selectedSymptoms.some(
+                  (symptom) => symptom.value === option.value
+                )
+              ) {
+                setSelectedSymptoms((prev) => [option, ...prev]);
+              } else {
+                message.info(`${option.label} already selected`, 1);
+              }
+              setCurrentSymp(null);
+            }}
+            onChange={(value) => setCurrentSymp(value)}
+            style={{ flex: 1 }}
+          >
+            <Input
+              placeholder="Select Symptom"
+              className="rounded-0"
+              onPressEnter={() => setCurrentSymp(null)}
+            />
+          </AutoComplete>
+          <Button
+            type="primary"
+            className="rounded-0"
+            onClick={getPrediction}
+            loading={loading}
+            disabled={!selectedSymptoms.length || loading}
+          >
+            Get Prognosis
+          </Button>
+        </div>
+      )}
       {loading && <Skeleton.Input active={true} block />}
-      <Divider className="my-3" orientation="left" orientationMargin={0}>
+      <Divider className="my-3" orientation="left">
         {selectedSymptoms.length > 0 ? (
           <span className="poppins-medium text-gradient-1">
             Your selected Symptoms
@@ -153,22 +162,20 @@ const SymptomsForm = ({ getPrediction }) => {
         )}
       </Divider>
       {selectedSymptoms.length > 0 && (
-        <>
-          <div className="d-flex flex-wrap">
-            {selectedSymptoms.map((item, index) => (
-              <Tag
-                closable
-                key={index}
-                size="large"
-                onClose={() => removeSymptom(item.value)}
-                style={{ backgroundColor: getRandomPaleColor() }}
-                className="m-1 poppins-medium text-capitalize"
-              >
-                {item.label}
-              </Tag>
-            ))}
-          </div>
-        </>
+        <div className="d-flex flex-wrap">
+          {selectedSymptoms.map((item, index) => (
+            <Tag
+              closable
+              key={index}
+              size="large"
+              onClose={() => removeSymptom(item.value)}
+              style={{ backgroundColor: getRandomPaleColor() }}
+              className="m-1 poppins-medium text-capitalize"
+            >
+              {item.label}
+            </Tag>
+          ))}
+        </div>
       )}
     </div>
   );

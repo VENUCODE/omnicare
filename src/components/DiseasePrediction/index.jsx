@@ -1,10 +1,11 @@
 import React from "react";
 import SymptomsForm from "./SymptomsForm";
 import { message } from "antd";
+import { endpoints, prediction } from "../../endpoints";
 
 const DiseasePred = () => {
   const getPrediction = (symptoms) => {
-    fetch("http://127.0.0.1:5000/diseasePredict", {
+    fetch(prediction + endpoints.diseasePredH, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +29,7 @@ const DiseasePred = () => {
   };
   return (
     <div>
-      <SymptomsForm getPrediction={getPrediction} />
+      <SymptomsForm />
     </div>
   );
 };

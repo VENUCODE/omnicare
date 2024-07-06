@@ -2,10 +2,9 @@ import { Button, message } from "antd";
 import React, { useEffect, useState } from "react";
 import UploadImage from "../UploadImage";
 import { endpoints, prediction } from "../../endpoints";
-import { Skeleton } from "antd";
 import { LinearProgress } from "@mui/material";
 
-const BrainTumorForm = ({ reset }) => {
+const Pneumonia = () => {
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -23,7 +22,7 @@ const BrainTumorForm = ({ reset }) => {
     setLoading(true);
 
     try {
-      const result = await fetch(prediction + endpoints.brainTumor, {
+      const result = await fetch(prediction + endpoints.Pneumonia, {
         method: "POST",
         body: formData,
       });
@@ -94,4 +93,4 @@ const BrainTumorForm = ({ reset }) => {
   );
 };
 
-export default BrainTumorForm;
+export default Pneumonia;

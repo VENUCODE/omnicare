@@ -5,7 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { useThree, extend } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { Skeleton } from "@mui/material";
+import TempCard from "./TempCard";
 extend({ OrbitControls });
 
 const Model = ({
@@ -52,24 +52,7 @@ const ModelLoad = ({
   ...props
 }) => {
   return (
-    <Suspense
-      fallback={
-        <div
-          style={{
-            height: "100%",
-            width: "100%",
-          }}
-        >
-          <img
-            src={imagepath}
-            alt="Loading..."
-            className="img-fluid"
-            style={{ height: "300px", width: "300px", objectFit: "contain" }}
-          />
-          {/* <Skeleton variant="rectangular" width="100%" height={150} /> */}
-        </div>
-      }
-    >
+    <Suspense fallback={<TempCard count={1} />}>
       <Canvas
         style={{
           height: "300px",

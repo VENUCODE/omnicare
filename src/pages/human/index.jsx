@@ -12,6 +12,7 @@ import Modal from "../../components/Modal";
 import DiseasePred from "../../components/DiseasePrediction";
 import BrainTumorForm from "../../components/BrainTumor";
 import DiabeticPrediction from "../../components/DiabeticPrediction";
+import HeartRisk from "../../components/HeartRisk";
 
 const Human = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -161,9 +162,7 @@ const Human = () => {
                 <DiseasePred />
               </div>
             )}
-            {selectedItem.title === "Heart Risk Prediction" && (
-              <input type="text" placeholder="Enter heart data" />
-            )}
+            {selectedItem.title === "Heart Risk Prediction" && <HeartRisk />}
             {selectedItem.title === "Pneumonia Prediction" && (
               <input type="text" placeholder="Enter respiratory data" />
             )}
