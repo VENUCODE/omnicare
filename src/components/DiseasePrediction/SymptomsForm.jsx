@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AutoComplete,
   Input,
@@ -10,7 +10,8 @@ import {
 } from "antd";
 import { symptoms } from "../../data/DiseaseData";
 import { endpoints, prediction } from "../../endpoints";
-
+import { formatDiseaseName } from "../webscrap";
+import { FaExternalLinkAlt } from "react-icons/fa";
 const formattedSymptoms = symptoms.map((symptom) => ({
   label: symptom.replace(/_/g, " ").toUpperCase(),
   value: symptom,
@@ -98,7 +99,7 @@ const SymptomsForm = () => {
       setPredictionResult(data.prediction);
     } catch (error) {
       console.error("Error getting prediction:", error);
-      message.error(error.message, 1000);
+      message.error(error.message, 1);
     } finally {
       setLoading(false);
     }
@@ -111,6 +112,44 @@ const SymptomsForm = () => {
 
   return (
     <div className="bg-white p-3">
+      {predictionResult && (
+        <div className="container mt-4">
+          <div className="card shadow-lg">
+            <div className="card-body">
+              <span className="poppins-regular">You seem to have</span>
+              <h1 className="text-capitalize mb-3 poppins-medium">
+                {predictionResult?.replace("_", " ")}
+              </h1>
+              <a
+                href={`https://en.wikipedia.org/wiki/${formatDiseaseName(predictionResult)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-link poppins-regular "
+              >
+                Learn more on about{" "}
+                <span className="text-capitalize  text-small">
+                  {predictionResult}
+                </span>
+                <FaExternalLinkAlt />
+              </a>
+            </div>
+            <div className="d-flex flex-row justify-content-between gap-1 p-1">
+              <button
+                className="bg-danger-subtle flex-grow-1 btn poppins-medium text-danger rounded-1"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+              <button
+                className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
+                onClick={handleClear}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {!predictionResult && (
         <div className="d-flex">
           <AutoComplete
@@ -150,18 +189,20 @@ const SymptomsForm = () => {
         </div>
       )}
       {loading && <Skeleton.Input active={true} block />}
-      <Divider className="my-3" orientation="left">
-        {selectedSymptoms.length > 0 ? (
-          <span className="poppins-medium text-gradient-1">
-            Your selected Symptoms
-          </span>
-        ) : (
-          <span className="poppins-medium text-gradient-3">
-            Select symptoms
-          </span>
-        )}
-      </Divider>
-      {selectedSymptoms.length > 0 && (
+      {!predictionResult && (
+        <Divider className="my-3" orientation="left" orientationMargin={0}>
+          {selectedSymptoms.length > 0 ? (
+            <span className="poppins-medium text-gradient-1">
+              Your selected Symptoms
+            </span>
+          ) : (
+            <span className="poppins-medium text-gradient-3">
+              Select symptoms
+            </span>
+          )}
+        </Divider>
+      )}
+      {!predictionResult && selectedSymptoms.length > 0 && (
         <div className="d-flex flex-wrap">
           {selectedSymptoms.map((item, index) => (
             <Tag

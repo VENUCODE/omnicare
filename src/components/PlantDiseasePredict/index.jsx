@@ -1,106 +1,96 @@
-import React, { useState } from "react";
-import { Button, Alert, Icon, Modal } from "rsuite";
+import { Button, message } from "antd";
+import React, { useEffect, useState } from "react";
+import UploadImage from "../UploadImage";
+import { endpoints, prediction } from "../../endpoints";
+import { LinearProgress } from "@mui/material";
 
-import { useModalState } from "../../misc/custom-hooks";
-const PlantDiseasePredict = () => {
-  const acceptTypes = ["image/png", "image/jpeg", "image/pjpeg"];
-  const fileInputTypes = ".png, .jpg, .jpeg";
-  const [image, setImage] = useState(null);
-  const [prediction, setPrediction] = useState({
-    predictions: "no prediction yet",
-  });
-  const { isOpen, open, close } = useModalState();
-  const validFile = (filetype) => {
-    return acceptTypes.includes(filetype);
-  };
-  const getPrediction = () => {
+const PlantDisease = ({ reset }) => {
+  const [fileList, setFileList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState(null);
+
+  const getPrediction = async () => {
     console.log("Came to predict");
-    if (!image) {
-      Alert.info("Select image");
+
+    if (!fileList.length) {
+      message.info("Select image");
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", fileList[0].originFileObj);
+    setLoading(true);
 
-    fetch("http://127.0.0.1:5000/plantDiseasePredict", {
-      method: "POST",
-      body: formData,
-    })
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(function (data) {
-        setPrediction(data);
-        open();
-
-        console.log(data);
-      })
-      .catch(function (error) {
-        console.log(error);
-        Alert.error(error.message, 2000);
+    try {
+      const result = await fetch(prediction + endpoints.plantDisease, {
+        method: "POST",
+        body: formData,
       });
-  };
-  const handleFileChange = (e) => {
-    const currentFile = e.target.files;
-    if (currentFile.length === 1) {
-      const file = currentFile[0];
-      console.log(file.type);
-      if (validFile(file.type)) {
-        setImage(file);
-        console.log(image);
-      } else {
-        Alert.warning(`Wrong file type ${file.type}`, 3000);
+
+      if (!result.ok) {
+        throw new Error("Network response was not ok");
       }
+
+      const data = await result.json();
+      console.log(data);
+      setResponse(data.predictions.replace("__", " ").replace("_", " "));
+    } catch (error) {
+      console.error(error);
+      message.error(error.message, 2);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setResponse(null);
+  }, [fileList]);
   return (
     <>
-      <div className="flex justify-center align-items-center gap-1 py-1 px-1">
-        <Button>
-          <label className="tracking-wide uppercase  cursor-pointer  d-grid text-white rounded-full h-[20px] w-[20px]  ">
-            <Icon icon={"camera"} className="text-gray-900" />
-            <input
-              type="file"
-              className="hidden"
-              accept={fileInputTypes}
-              onChange={handleFileChange}
-            />
-          </label>
-        </Button>
-        {
-          <Button onClick={getPrediction} disabled={!image}>
-            Get prediction
-          </Button>
-        }
+      {loading && <LinearProgress color="success" />}
+      <div className="container flex justify-center align-items-center gap-1 py-1 px-1">
+        {response ? (
+          <div className="container mt-4">
+            <div className="card shadow-lg">
+              <div className="card-body">
+                <h1 className="text-capitalize mb-3 poppins-medium">
+                  {response?.replace("_", " ")}
+                </h1>
+              </div>
+              <button
+                className="bg-danger btn poppins-medium text-white rounded-0"
+                onClick={() => {
+                  setResponse(null);
+                  setFileList([]);
+                }}
+              >
+                Clear Response
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="d-flex  flex-column justify-content-start">
+            <div className="p-1">
+              <UploadImage fileList={fileList} setFileList={setFileList} />
+            </div>
+            <div className="p-1">
+              <Button
+                type="dashed"
+                className="poppins-regular"
+                block
+                danger
+                loading={loading}
+                onClick={getPrediction}
+                disabled={fileList.length === 0}
+              >
+                Get Prediction
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
-      <Modal show={isOpen} onHide={close}>
-        <Modal.Header>
-          <Modal.Title>Your disease prediction</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h1>Prediction of Disease</h1>
-          <p>{prediction.predictions}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            color="red"
-            block
-            onClick={() => {
-              setPrediction({});
-              close();
-            }}
-          >
-            close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      ;
     </>
   );
 };
 
-export default PlantDiseasePredict;
+export default PlantDisease;

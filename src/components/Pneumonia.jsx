@@ -1,8 +1,8 @@
 import { Button, message } from "antd";
 import React, { useEffect, useState } from "react";
-import UploadImage from "../UploadImage";
-import { endpoints, prediction } from "../../endpoints";
+import { endpoints, prediction } from "../endpoints";
 import { LinearProgress } from "@mui/material";
+import UploadImage from "./UploadImage";
 
 const Pneumonia = () => {
   const [fileList, setFileList] = useState([]);

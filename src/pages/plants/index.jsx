@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import ModelLoad from "../../components/ModelLoad";
 import Modal from "../../components/Modal";
+import PlantDisease from "../../components/PlantDiseasePredict";
+import CropRec from "../../components/CropRecc";
 
 const Plants = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -125,11 +127,9 @@ const Plants = () => {
       >
         {selectedItem && (
           <div>
-            {selectedItem.title === "Crop Recommendation" && (
-              <input type="text" placeholder="Enter soil data" />
-            )}
+            {selectedItem.title === "Crop Recommendation" && <CropRec />}
             {selectedItem.title === "Plant Disease Prediction" && (
-              <input type="text" placeholder="Enter leaf image data" />
+              <PlantDisease />
             )}
             {selectedItem.title === "Plant Identification" && (
               <input type="text" placeholder="Enter plant symptoms" />

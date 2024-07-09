@@ -1,79 +1,65 @@
 import React, { useRef, useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { Container, Typography } from "@mui/material";
-import { endpoints, prediction } from "../../endpoints";
+import { endpoints, prediction } from "../endpoints";
 
 const markUpdata = [
   {
-    label: "Pregnancies",
-    name: "Pregnancies",
-    placeholder: "Pregnancies",
-    tooltip: "0 or more",
+    label: "Nitrogen",
+    name: "N",
+    placeholder: "Nitrogen",
+    tooltip: "Required (0-100)",
   },
   {
-    label: "Glucose",
-    name: "Glucose",
-    placeholder: "Glucose 0-199",
-    tooltip: "Required (milligrams per deciliter (mg/dL))",
+    label: "Phosphorus",
+    name: "P",
+    placeholder: "Phosphorus",
+    tooltip: "Required (0-100)",
   },
   {
-    label: "Blood Pressure",
-    name: "BloodPressure",
-    placeholder: "Blood Pressure(80/120)",
-    tooltip: "Required (millimeters of mercury (mm Hg))",
+    label: "Potassium",
+    name: "k",
+    placeholder: "Potassium",
+    tooltip: "Required (0-100)",
   },
   {
-    label: "Skin Thickness",
-    name: "SkinThickness",
-    placeholder: "Skin Thickness (0-99)",
-    tooltip: "Required (in millimeters (mm))",
+    label: "Temperature",
+    name: "temperature",
+    placeholder: "Temperature (°C)",
+    tooltip: "Required (°C)",
   },
   {
-    label: "Insulin",
-    name: "Insulin",
-    placeholder: "Insulin (0-850)",
-    tooltip:
-      "Required (micro International Units per milliliter (µIU/mL) (0-880))",
+    label: "Humidity",
+    name: "humidity",
+    placeholder: "Humidity (%)",
+    tooltip: "Required (%)",
   },
   {
-    label: "Body Mass Index",
-    name: "BodyMassIndex",
-    placeholder: "Body Mass Index (mass/height)",
-    tooltip: "Required (Kg/m²)",
-  },
-  {
-    label: "Age",
-    name: "Age",
-    placeholder: "Age",
-    tooltip: "Required (in years)",
-  },
-  {
-    label: "Diabetes Pedigree Function",
-    name: "DiabetesPedigreeFunction",
-    placeholder: "Diabetes Pedigree Function(0.0 to 3.0)",
-    tooltip: "Required (0-3)",
+    label: "pH Level",
+    name: "ph",
+    placeholder: "pH Level",
+    tooltip: "Required (0-14)",
   },
 ];
 
 const INITIAL_FORM = {
-  Pregnancies: "",
-  Glucose: "",
-  BloodPressure: "",
-  SkinThickness: "",
-  Insulin: "",
-  BodyMassIndex: "",
-  DiabetesPedigreeFunction: "",
-  Age: "",
+  N: "",
+  P: "",
+  k: "",
+  temperature: "",
+  humidity: "",
+  ph: "",
 };
 
-const DiabeticSymptomForm = () => {
+const CropRec = () => {
   const formRef = useRef(null);
   const [formValue, setFormValue] = useState(INITIAL_FORM);
   const [predictionResult, setPredictionResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const getDiabeticPredict = (inputValues) => {
+
+  const getCropRecommendation = (inputValues) => {
     setLoading(true);
-    fetch(prediction + endpoints.diabeticPredict, {
+    fetch(prediction + endpoints.cropRecommend, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -113,20 +99,15 @@ const DiabeticSymptomForm = () => {
 
   const onSubmit = async (e) => {
     try {
-      const updatedValues = Object.entries(formValue).map(
-        ([key, value], index) => {
-          if (key === "DiabetesPedigreeFunction") {
-            return parseFloat(value);
-          } else {
-            return parseInt(value, 10);
-          }
-        }
+      const updatedValues = Object.values(formValue).map((value) =>
+        parseFloat(value)
       );
-      getDiabeticPredict(updatedValues);
+      getCropRecommendation(updatedValues);
     } catch (error) {
       message.error("Form is invalid");
     }
   };
+
   const handleClear = () => {
     setPredictionResult(null);
     setFormValue(INITIAL_FORM);
@@ -136,7 +117,7 @@ const DiabeticSymptomForm = () => {
     <Container>
       <Typography variant="h4" gutterBottom>
         <span className="poppins-medium text-gradient-2">
-          Diabetic Symptom Form
+          Crop Recommendation Form
         </span>
       </Typography>
       {predictionResult && (
@@ -188,7 +169,7 @@ const DiabeticSymptomForm = () => {
           ))}
           <Form.Item>
             <Button type="primary" htmlType="submit" block loading={loading}>
-              Get Prognosis
+              Get Recommendation
             </Button>
           </Form.Item>
         </Form>
@@ -197,4 +178,4 @@ const DiabeticSymptomForm = () => {
   );
 };
 
-export default DiabeticSymptomForm;
+export default CropRec;
