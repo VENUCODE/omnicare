@@ -9,7 +9,7 @@ const Mentor = ({
 }) => {
   return (
     <div className="row my-2">
-      <div className="col-md-6 col-12">
+      <div className="col-md-6 col-12 bg-glass px-0">
         {" "}
         <img
           src="https://picsum.photos/200/300?random=2"
@@ -17,17 +17,17 @@ const Mentor = ({
           height={"300px"}
         />
       </div>
-      <div className="col-md-6 col-12 bg-white">
+      <div className="col-md-6 col-12 bg-glass rounded-0">
         <div>
-          <h1 className="text-gradient-2 poppins-semibold w-maxcontent">
+          <h1 className="text-white poppins-semibold w-maxcontent">
             Mr. Mallikarjuna Nandi
           </h1>
-          <h5 className="text-dark poppins-medium w-maxcontent">
+          <h5 className="text-light poppins-medium w-maxcontent">
             Assistant Professor@ IIIT ONGOLE
           </h5>
         </div>
         <div>
-          <p className="poppins-regular text-muted">
+          <p className="poppins-regular text-light">
             Our HoD exemplifies visionary leadership and profound expertise in
             computer science. He fosters innovation and empowers students to
             excel, combining deep knowledge with unwavering support. His

@@ -134,11 +134,6 @@ const DiabeticSymptomForm = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        <span className="poppins-medium text-gradient-2">
-          Diabetic Symptom Form
-        </span>
-      </Typography>
       {predictionResult && (
         <div className="container mt-4">
           <div className="card shadow-lg">
@@ -187,7 +182,13 @@ const DiabeticSymptomForm = () => {
             </Form.Item>
           ))}
           <Form.Item>
-            <Button type="primary" htmlType="submit" block loading={loading}>
+            <Button
+              type="dashed"
+              danger
+              htmlType="submit"
+              block
+              loading={loading}
+            >
               Get Prognosis
             </Button>
           </Form.Item>

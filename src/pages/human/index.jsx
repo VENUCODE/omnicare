@@ -84,15 +84,12 @@ const Human = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mb-4">
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <div
-            className=" bg-white shadow-sm py-1  rounded-5 w-100"
-            data-aos="fade-right"
-          >
+          <div className=" py-1  w-100" data-aos="fade-right">
             <h2
-              className="poppins-bold  rounded-5 mx-auto  text-gradient-2  text-center "
+              className="poppins-bold  rounded-5 mx-auto  text-white text-center "
               data-aos="flip-down"
               data-aos-delay="1250"
             >
@@ -103,22 +100,22 @@ const Human = () => {
         {humanitems.map((model, index) => (
           <Grid item xs={12} md={6} key={index} className="bg-transparent">
             <Card className="row shadow-none shadow bg-transparent p-0 m-0">
-              <CardMedia className=" col-md-6 col-12 ">
+              <CardMedia className=" col-md-6 col-12 bg-glass rgrad-2 rounded-0">
                 <ModelLoad
                   path={model.path}
                   scale={model.scale}
                   position={model.position}
                   imagepath={model.img}
-                  scene={true}
+                  scene={false}
                   env={false}
                   animation={model.animation}
                   rotation={model.rotation}
                 />
               </CardMedia>
-              <CardContent className="bg-white col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
+              <CardContent className="bg-glass rounded-0 col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
                 <div>
                   <p
-                    className="poppins-bold mb-0 fs-4 text-gradient-2 text-capitalize"
+                    className="poppins-bold mb-0 fs-4 text-light text-capitalize"
                     data-aos="zoom-in"
                   >
                     {model.title}
@@ -127,13 +124,13 @@ const Human = () => {
                     variant="body2"
                     color="text.secondary"
                     data-aos="zoom-in"
-                    className=""
+                    className="text-white"
                   >
                     {model.description}
                   </Typography>
                 </div>
                 <Button
-                  className="  px-2 py-1 rounded-0 bg-grad-2 w-maxcontent text-white bg-grad-1 text-decoration-none  poppins-regular text-start border-0 "
+                  className="  px-2 py-1 rounded-0 bg-glass rounded-0 poppins-medium w-maxcontent text-white  text-decoration-none text-capitalize text-start border-0 "
                   onClick={() => {
                     handleOpenModal(model);
                   }}
@@ -148,7 +145,11 @@ const Human = () => {
       <Modal
         open={modalOpen}
         onClose={handleCloseModal}
-        title={selectedItem?.title}
+        title={
+          <span className="text-capitalize text-gradient-2">
+            {selectedItem?.title}
+          </span>
+        }
       >
         {selectedItem && (
           <div>

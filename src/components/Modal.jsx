@@ -5,8 +5,13 @@ const { Title } = Typography;
 
 const Modal = ({ open, onClose, title, children }) => {
   return (
-    <AntdModal open={open} onCancel={onClose} footer={null}>
-      <div className="bg-white h-100">
+    <AntdModal
+      open={open}
+      onCancel={onClose}
+      footer={null}
+      className="bg-glass"
+    >
+      <div className="h-100">
         <Title level={4} className="poppins-medium">
           {title}
         </Title>

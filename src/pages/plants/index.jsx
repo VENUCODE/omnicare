@@ -65,12 +65,9 @@ const Plants = () => {
     <div className="container my-4">
       <Grid container spacing={4} className="bg-transparent">
         <Grid item xs={12}>
-          <div
-            className=" bg-white shadow-sm py-1  rounded-5 w-100"
-            data-aos="fade-right"
-          >
+          <div className="  py-1  rounded-5 w-100" data-aos="fade-right">
             <h2
-              className="poppins-bold  rounded-5 mx-auto  text-gradient-2  text-center "
+              className="poppins-bold  rounded-5 mx-auto  text-light  text-center "
               data-aos="flip-down"
               data-aos-delay="1250"
             >
@@ -81,22 +78,22 @@ const Plants = () => {
         {plantitems.map((model, index) => (
           <Grid item xs={12} md={6} key={index} className="bg-transparent">
             <Card className="row shadow-none shadow bg-transparent p-0 m-0 ">
-              <CardMedia className=" col-md-6 col-12">
+              <CardMedia className=" col-md-6 col-12 bg-glass rgrad-3 rounded-0">
                 <ModelLoad
                   path={model.path}
                   scale={model.scale}
                   position={model.position}
                   imagepath={model.img}
-                  scene={true}
+                  scene={false}
                   env={false}
                   animation={model.animation}
                   rotation={model.rotation}
                 />
               </CardMedia>
-              <CardContent className="bg-white col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
+              <CardContent className="bg-glass rounded-0 col-md-6 col-12 d-flex flex-column justify-content-between gap-2">
                 <div>
                   <p
-                    className="poppins-bold mb-0 fs-4 text-gradient-2"
+                    className="poppins-bold mb-0 fs-4 text-white"
                     data-aos="zoom-in"
                   >
                     {model.title}
@@ -105,12 +102,13 @@ const Plants = () => {
                     variant="body2"
                     color="text.secondary"
                     data-aos="zoom-in"
+                    className="text-light"
                   >
                     {model.description}
                   </Typography>
                 </div>
                 <Button
-                  className="  px-2 py-1 rounded-0 w-maxcontent bg-grad-2 text-white   poppins-regular text-start border-0 "
+                  className="  px-2 py-1 rounded-0 w-maxcontent bg-glass rounded-0 text-white   poppins-regular text-start border-0 "
                   onClick={() => handleOpenModal(model)}
                 >
                   Get prognosis

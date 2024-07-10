@@ -86,9 +86,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="container-fluid d-flex flex-column gap-3 pt-2">
-      <div className="bg-white">
-        <h2 className="text-gradient-3 poppins-bold w-maxcontent mx-auto ">
+    <div className="container-fluid d-flex flex-column gap-3 ">
+      <div className="bg-glass ">
+        <h2 className="text-white poppins-bold w-maxcontent mx-auto ">
           Explore our services
         </h2>
       </div>
@@ -103,18 +103,19 @@ const Home = () => {
         >
           <div className="d-flex flex-row gap-3">
             {[...humanitems, ...plantitems].map((model, index) => (
-              <div className="" key={index}>
-                <ModelLoad
-                  path={model.path}
-                  scale={model.scale}
-                  position={model.position}
-                  imagepath={model.img}
-                  scene={false}
-                  animation={false}
-                  rotation={model.rotation}
-                  env={false}
-                  backgroundColor="white"
-                />
+              <div key={index}>
+                <div className="rgrad-1 bg-glass">
+                  <ModelLoad
+                    path={model.path}
+                    scale={model.scale}
+                    position={model.position}
+                    imagepath={model.img}
+                    scene={false}
+                    animation={false}
+                    rotation={model.rotation}
+                    env={false}
+                  />
+                </div>
                 <Link to={model.to} className="text-decoration-none">
                   <p className="bg-dark text-light poppins-medium text-center">
                     {model.title}

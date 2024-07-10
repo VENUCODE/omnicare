@@ -5,8 +5,8 @@ import Home from "../../pages/Home";
 import Team from "../Team";
 const LandingPage = () => {
   return (
-    <div className="container-fluid d-flex flex-column gap-3">
-      <div>
+    <div className=" border border-2 border-danger container-fluid d-flex flex-column gap-3">
+      <div className="contianer-fluid">
         <Hero />
       </div>
       <div>

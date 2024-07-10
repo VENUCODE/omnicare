@@ -9,6 +9,7 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import TempCard from "./components/TempCard";
 import { CSSTransition } from "react-transition-group";
 import "./transitionStyle.css";
+import { HeroAnimation } from "./components/AnimatedBox/HeroAnimation";
 
 const LazyComponent = (factory) => {
   const Component = React.lazy(factory);
@@ -67,13 +68,18 @@ export default function App() {
   const MemoizedProfile = useMemo(() => Profile, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<LandingPage />} />
-        <Route path="/human" element={<MemoizedHuman />} />
-        <Route path="/plants" element={<MemoizedPlants />} />
-        <Route path="/profile" element={<MemoizedProfile />} />
-      </Route>
-    </Routes>
+    <>
+      <div className="h-100 w-100">
+        <HeroAnimation />
+      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<LandingPage />} />
+          <Route path="/human" element={<MemoizedHuman />} />
+          <Route path="/plants" element={<MemoizedPlants />} />
+          <Route path="/profile" element={<MemoizedProfile />} />
+        </Route>
+      </Routes>
+    </>
   );
 }

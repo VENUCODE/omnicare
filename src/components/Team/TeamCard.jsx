@@ -9,8 +9,8 @@ const TeamCard = ({ data }) => {
   return (
     <div className="slide">
       <div className="m-1">
-        <div className="w-maxcontent content bg-white">
-          <div className="col-12 ">
+        <div className="w-maxcontent content ">
+          <div className="col-12  ">
             <img
               src={img}
               alt="img"
@@ -20,7 +20,7 @@ const TeamCard = ({ data }) => {
               }}
             />
           </div>
-          <div className="col-12 d-flex flex-column justify-content-center align-items-center gap-0 py-2">
+          <div className="col-12 d-flex bg-glass  flex-column justify-content-center align-items-center gap-0 py-2">
             <p className="poppins-bold my-0 pt-2 text-gradient-1">{name}</p>
             <p className="poppins-medium my-0 pt-2 text-gradient-1">{id}</p>
             <p className="poppins-regular my-0 pt-2 text-gradient-1">{title}</p>

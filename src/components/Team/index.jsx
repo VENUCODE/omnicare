@@ -14,16 +14,16 @@ const Team = () => {
   return (
     <div className="container-fluid d-flex flex-column gap-3">
       <div>
-        <div className="bg-white mb-4">
-          <h1 className="text-gradient-3  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
+        <div className="bg-glass mb-4">
+          <h1 className="text-white  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
             Meet our Guide
           </h1>
         </div>
         <Mentor />
       </div>
       <div>
-        <div className="bg-white">
-          <h1 className="text-gradient-2  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
+        <div className="bg-glass">
+          <h1 className="text-light  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
             Meet our team
           </h1>
         </div>

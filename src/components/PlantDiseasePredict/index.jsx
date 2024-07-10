@@ -1,8 +1,9 @@
-import { Button, message } from "antd";
+import { Button, Typography, message } from "antd";
 import React, { useEffect, useState } from "react";
 import UploadImage from "../UploadImage";
 import { endpoints, prediction } from "../../endpoints";
 import { LinearProgress } from "@mui/material";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const PlantDisease = ({ reset }) => {
   const [fileList, setFileList] = useState([]);
@@ -57,15 +58,42 @@ const PlantDisease = ({ reset }) => {
                   {response?.replace("_", " ")}
                 </h1>
               </div>
-              <button
-                className="bg-danger btn poppins-medium text-white rounded-0"
-                onClick={() => {
-                  setResponse(null);
-                  setFileList([]);
-                }}
+              <Typography.Link
+                href={`https://en.wikipedia.org/w/index.php?fulltext=1&search=${response.replace("_", "+")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="poppins-regular"
+                style={{ fontSize: "14px" }} // Adjust font size here
               >
-                Clear Response
-              </button>
+                Learn more about{" "}
+                <span className="text-capitalize text-small">
+                  {response.replace("_", " ")}
+                </span>
+                <FaExternalLinkAlt
+                  style={{ fontSize: "12px", marginLeft: "4px" }}
+                />{" "}
+                {/* Adjust icon size and margin */}
+              </Typography.Link>
+              <div className="d-flex flex-row justify-content-between gap-1 p-1">
+                <button
+                  className="bg-danger-subtle flex-grow-1 btn poppins-medium text-danger rounded-1"
+                  onClick={() => {
+                    setResponse(null);
+                    setFileList([]);
+                  }}
+                >
+                  Clear
+                </button>
+                <button
+                  className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
+                  onClick={() => {
+                    setResponse(null);
+                    setFileList([]);
+                  }}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         ) : (

@@ -8,7 +8,7 @@ export const endpoints = {
   pneumonia: "/pneumonia",
   //plant prediction endpoints
   plantDisease: "/plantDiseasePredict",
-  cropRecommend: "/crop-recommend",
+  cropRecommend: "/cropRecommend",
   plantIdentify: "/plant-identify",
 
   //user management data
