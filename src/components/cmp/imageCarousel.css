@@ -29,7 +29,7 @@
 
 
 .slick-center .slide .content {
-  background-color: rgb(255, 255, 255) !important;
+  background-color: transparent;
   transition: background-color 0.5s ease;
 }
 

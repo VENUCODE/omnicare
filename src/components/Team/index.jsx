@@ -37,7 +37,7 @@ const Team = () => {
           {team.map((data, i) => {
             return (
               <div key={i}>
-                <div className="row">
+                <div className="row bg-transparent">
                   <TeamCard data={data} />
                 </div>
               </div>

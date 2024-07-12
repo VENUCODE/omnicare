@@ -6,14 +6,25 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import { VscAccount } from "react-icons/vsc";
 import "./navStyles.css";
 import logo from "../assets/omnicarelogo.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 function Navbar() {
+  const location = useLocation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-  const [active, setActive] = useState("home");
-  const id = useParams();
-  useEffect(() => {
-    console.log(id);
-  }, [id]);
+  const [active, setActive] = useState(getInitialActive(location.pathname));
+
+  // Function to set initial active state based on pathname
+  function getInitialActive(pathname) {
+    if (pathname === "/") return "home";
+    if (pathname === "/plants") return "plant";
+    if (pathname === "/human") return "human";
+    if (pathname === "/profile" || pathname.startsWith("/profile/"))
+      return "profile";
+    return "home";
+  }
+  function handleSetActive(link) {
+    setActive(link);
+  }
+
   return (
     <>
       {!isSmallDevice && (
@@ -25,23 +36,39 @@ function Navbar() {
             </Link>
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0 ">
-                <li className="nav-item  poppins-regular">
-                  <Link to="/" className="nav-link text-light">
+                <li className={`nav-item poppins-light`}>
+                  <Link
+                    to="/"
+                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "home" ? "rgrad-1 bg-glass rounded-5 " : ""}`}
+                    onClick={() => handleSetActive("home")}
+                  >
                     Home
                   </Link>
                 </li>
-                <li className="nav-item  poppins-regular">
-                  <Link to="/plants" className="nav-link text-light">
+                <li className={`nav-item poppins-light `}>
+                  <Link
+                    to="/plants"
+                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "plants" ? "rgrad-3 bg-glass rounded-5 " : ""}`}
+                    onClick={() => handleSetActive("plants")}
+                  >
                     Plants
                   </Link>
                 </li>
-                <li className="nav-item  poppins-regular">
-                  <Link to="/human" className="nav-link text-light">
+                <li className={`nav-item poppins-light`}>
+                  <Link
+                    to="/human"
+                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "human" ? "rgrad-2 bg-glass rounded-5 " : ""}`}
+                    onClick={() => handleSetActive("human")}
+                  >
                     Human
                   </Link>
                 </li>
-                <li className="nav-item  poppins-regular">
-                  <Link to="/profile" className="nav-link text-light">
+                <li className={`nav-item poppins-light `}>
+                  <Link
+                    to="/profile"
+                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "profile" ? "rgrad-1 bg-glass rounded-5 " : ""}`}
+                    onClick={() => handleSetActive("profile")}
+                  >
                     profile
                   </Link>
                 </li>

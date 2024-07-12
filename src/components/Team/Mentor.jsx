@@ -8,16 +8,22 @@ const Mentor = ({
   description = "Lorem ispusm",
 }) => {
   return (
-    <div className="row my-2">
-      <div className="col-md-6 col-12 bg-glass px-0">
+    <div className="row  ">
+      <div className=" col-md-5 col-12  d-flex justify-content-center align-items-center ">
         {" "}
         <img
-          src="https://picsum.photos/200/300?random=2"
-          className="object-fit-cover w-100"
-          height={"300px"}
+          src="https://picsum.photos/200/300?random=8"
+          className="object-fit-cover w-100 bg-glass rounded-2"
+          style={{
+            maxWidth: "400px",
+            width: "300px",
+            minWidth: "200px",
+            maxHeight: "200px",
+            height: "100%",
+          }}
         />
       </div>
-      <div className="col-md-6 col-12 bg-glass rounded-0">
+      <div className="bg-glass rgrad-r col-md-6 col-12 rounded-0">
         <div>
           <h1 className="text-white poppins-semibold w-maxcontent">
             Mr. Mallikarjuna Nandi

@@ -44,6 +44,10 @@ body::-webkit-scrollbar {
   /* Subtle shadow for depth */
 }
 
+.nav-item {
+  font-size: clamp(0.8rem, 0.9rem, 1rem) !important;
+}
+
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -250,8 +254,20 @@ body::-webkit-scrollbar {
   backdrop-filter: blur(16px) saturate(159%);
   -webkit-backdrop-filter: blur(16px) saturate(159%);
   background-color: rgba(171, 185, 255, 0.18);
-  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.bg-glass-1 {
+
+  backdrop-filter: blur(5px) saturate(159%);
+  -webkit-backdrop-filter: blur(16px) saturate(159%);
+  background-color: rgba(171, 185, 255, 0.18);
+
+}
+
+
+.br-transparent {
+  background-color: transparent;
 }
 
 .rgrad-1 {
@@ -264,6 +280,20 @@ body::-webkit-scrollbar {
   background: radial-gradient(at center bottom, #d24e1a, transparent);
 }
 
+.rgrad-22 {
+  background: radial-gradient(at center bottom, #d24e1a, transparent);
+  background: radial-gradient(at center top, #d24e1a, rgba(255, 0, 0, 0.349));
+}
+
+
 .rgrad-3 {
   background: radial-gradient(at center bottom, #50fd6a, transparent);
+}
+
+.rgrad-r {
+  background: radial-gradient(at bottom right, #1ad2c696, transparent);
+}
+
+.rgrad-pale {
+  background: radial-gradient(at bottom left, #69edc330, transparent);
 }

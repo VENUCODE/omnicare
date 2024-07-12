@@ -1,18 +1,16 @@
 import React from "react";
 const TeamCard = ({ data }) => {
-  const {
-    name,
-    id,
-    title,
-    img = "https://picsum.photos/200/300?random=2",
-  } = data;
+  const { name, id, title, img = "" } = data;
   return (
-    <div className="slide">
-      <div className="m-1">
-        <div className="w-maxcontent content ">
+    <div className="slide ">
+      <div className="m-1 ">
+        <div className="w-maxcontent content  bg-info">
           <div className="col-12  ">
             <img
-              src={img}
+              src={
+                img ||
+                `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 10)}`
+              }
               alt="img"
               style={{
                 height: "100px",

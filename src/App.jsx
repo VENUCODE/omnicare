@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, Suspense, useState } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
+import { HeroAnimation } from "./components/AnimatedBox/HeroAnimation";
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/Landing sections";
 import AOS from "aos";
@@ -9,7 +10,8 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import TempCard from "./components/TempCard";
 import { CSSTransition } from "react-transition-group";
 import "./transitionStyle.css";
-import { HeroAnimation } from "./components/AnimatedBox/HeroAnimation";
+import MyPredictions from "./pages/Profile/MyPredictions";
+import ProfileLayout from "./pages/Profile/Layout";
 
 const LazyComponent = (factory) => {
   const Component = React.lazy(factory);
@@ -78,6 +80,11 @@ export default function App() {
           <Route path="/human" element={<MemoizedHuman />} />
           <Route path="/plants" element={<MemoizedPlants />} />
           <Route path="/profile" element={<MemoizedProfile />} />
+          <Route path="/profile" element={<ProfileLayout />}>
+            <Route index element={<Profile />} />
+            <Route path="my-info" element={<Profile />} />
+            <Route path="my-predictions" element={<MyPredictions />} />
+          </Route>
         </Route>
       </Routes>
     </>

@@ -104,7 +104,7 @@ const Home = () => {
           <div className="d-flex flex-row gap-3">
             {[...humanitems, ...plantitems].map((model, index) => (
               <div key={index}>
-                <div className="rgrad-1 bg-glass">
+                <div className="rgrad-1 bg-glass overflow-hidden">
                   <ModelLoad
                     path={model.path}
                     scale={model.scale}
@@ -117,7 +117,12 @@ const Home = () => {
                   />
                 </div>
                 <Link to={model.to} className="text-decoration-none">
-                  <p className="bg-dark text-light poppins-medium text-center">
+                  <p
+                    className={
+                      `text-light poppins-medium text-center bg-glass py-2 rounded-5 ` +
+                      `rgrad-${Math.floor(Math.random() * 3) + 1}`
+                    }
+                  >
                     {model.title}
                   </p>
                 </Link>

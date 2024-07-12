@@ -35,7 +35,7 @@ export const HeroAnimation = () => {
           value: "#1b2c3d11",
         },
         image: "url('/src/assets/omnicarelogo.svg')",
-        position: "50% 50%",
+        position: "130% 250%",
         repeat: "no-repeat",
         size: "40%",
         opacity: 1,

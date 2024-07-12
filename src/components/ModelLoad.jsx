@@ -1,39 +1,68 @@
-import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
+import React, { Suspense, useRef, useState, useEffect } from "react";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  useThree,
+  extend,
+} from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { useThree, extend } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import TempCard from "./TempCard";
+
 extend({ OrbitControls });
 
-const Model = ({
-  path = "",
-  scale = 1,
-  position = [0, 0, 0],
-  rotation = [0, 0, 0],
-  animation,
-}) => {
-  const gltf = useLoader(GLTFLoader, path);
-  const modelRef = useRef();
+// Create a cache object
+const modelCache = {};
 
-  useFrame(() => {
-    if (modelRef.current && animation) {
-      modelRef.current.rotation.y += 0.005;
+// Custom hook to load a model with caching
+const useCachedGLTF = (url) => {
+  const [model, setModel] = useState(null);
+
+  useEffect(() => {
+    if (modelCache[url]) {
+      setModel(modelCache[url]);
+    } else {
+      const loader = new GLTFLoader();
+      loader.load(url, (gltf) => {
+        modelCache[url] = gltf;
+        setModel(gltf);
+      });
     }
-  });
+  }, [url]);
 
-  return (
-    <primitive
-      ref={modelRef}
-      object={gltf.scene}
-      rotation={rotation}
-      scale={scale}
-      position={position}
-    />
-  );
+  return model;
 };
+
+const Model = React.memo(
+  ({
+    path = "",
+    scale = 1,
+    position = [0, 0, 0],
+    rotation = [0, 0, 0],
+    animation,
+  }) => {
+    const model = useCachedGLTF(path);
+    const modelRef = useRef();
+
+    useFrame(() => {
+      if (modelRef.current && animation) {
+        modelRef.current.rotation.y += 0.005;
+      }
+    });
+
+    return model ? (
+      <primitive
+        ref={modelRef}
+        object={model.scene}
+        rotation={rotation}
+        scale={scale}
+        position={position}
+      />
+    ) : null;
+  }
+);
 
 const Controls = () => {
   const { camera, gl } = useThree();
@@ -65,7 +94,6 @@ const ModelLoad = ({
           backgroundBlurriness={0.08}
           files={env ? "/env.hdr" : "/medow.hdr"}
         />
-
         <Model
           path={path}
           position={position}
@@ -73,7 +101,6 @@ const ModelLoad = ({
           rotation={rotation}
           animation={animation}
         />
-
         <Controls />
       </Canvas>
     </Suspense>
