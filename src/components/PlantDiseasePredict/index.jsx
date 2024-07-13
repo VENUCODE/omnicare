@@ -4,6 +4,7 @@ import UploadImage from "../UploadImage";
 import { endpoints, prediction } from "../../endpoints";
 import { LinearProgress } from "@mui/material";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { useUser } from "../../context/useUser";
 
 const PlantDisease = ({ reset }) => {
   const [fileList, setFileList] = useState([]);
@@ -42,7 +43,24 @@ const PlantDisease = ({ reset }) => {
       setLoading(false);
     }
   };
-
+  const handleClear = () => {
+    setFileList([]);
+    setResponse(null);
+  };
+  const { savePrediction } = useUser();
+  const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("image", fileList[0].originFileObj);
+    formData.append("prediction", response);
+    formData.append("category", "Plant disease prediction");
+    const res = await savePrediction(formData, true);
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    handleClear();
+  };
   useEffect(() => {
     setResponse(null);
   }, [fileList]);
@@ -77,19 +95,13 @@ const PlantDisease = ({ reset }) => {
               <div className="d-flex flex-row justify-content-between gap-1 p-1">
                 <button
                   className="bg-danger-subtle flex-grow-1 btn poppins-medium text-danger rounded-1"
-                  onClick={() => {
-                    setResponse(null);
-                    setFileList([]);
-                  }}
+                  onClick={handleClear}
                 >
                   Clear
                 </button>
                 <button
                   className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
-                  onClick={() => {
-                    setResponse(null);
-                    setFileList([]);
-                  }}
+                  onClick={handleSave}
                 >
                   Save
                 </button>

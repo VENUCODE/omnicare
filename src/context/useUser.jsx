@@ -65,29 +65,64 @@ export const UserProvider = ({ children }) => {
       };
     }
   };
-  const savePrediction = async (payload) => {
+  const savePrediction = async (payload, formData = false) => {
     try {
+      const headers = {
+        authorization: authToken,
+      };
+
+      if (!formData) {
+        headers["Content-Type"] = "application/json";
+      }
+
       const response = await axios.post(
         `${userUrl}${endpoints.savePrediction}`,
-        { ...payload },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: authToken,
-          },
-        }
+        payload,
+        { headers }
       );
-      if (response) {
+
+      if (response.status === 201) {
         return { success: true, message: "Saved successfully" };
+      } else {
+        return {
+          success: false,
+          message: "Failed to save. Please try again later.",
+        };
       }
     } catch (error) {
-      console.log("Failed to save prediction", error);
+      console.error("Failed to save prediction", error);
       return {
         success: false,
         message: "Failed to save. Please try again later.",
       };
     }
   };
+  const deletePrediction = async (predictionId) => {
+    try {
+      const response = await fetch(`${userUrl}${endpoints.deletePredcition}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: authToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ predictionId }),
+      });
+
+      if (response.ok) {
+        return { success: true, message: "Deleted successfully" };
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete prediction");
+      }
+    } catch (error) {
+      console.error("Failed to delete prediction", error);
+      return {
+        success: false,
+        message: "Failed to delete. Please try again later.",
+      };
+    }
+  };
+
   const logout = () => {
     clearAuthToken();
   };
@@ -110,6 +145,7 @@ export const UserProvider = ({ children }) => {
         userData,
         isAuthenticated,
         authToken,
+        deletePrediction,
         savePrediction,
         login,
         signup,

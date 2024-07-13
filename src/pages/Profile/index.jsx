@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import { MdEmail, MdPerson } from "react-icons/md";
-import { FaChartLine } from "react-icons/fa";
+import { FaChartLine, FaSignOutAlt } from "react-icons/fa";
 import img from "../../assets/blood.jpg";
 import { useUser } from "../../context/useUser";
+import { Button } from "antd";
 const Profile = () => {
-  const { userData } = useUser();
+  const { userData, logout } = useUser();
   const [user, setUser] = useState(userData);
   useEffect(() => {
     setUser(userData);
@@ -15,7 +16,7 @@ const Profile = () => {
     <Container className="py-4">
       <Row className="justify-content-center">
         <Col xs={12} md={6}>
-          <div className="rgrad-1 p-4 rounded-0 text-center">
+          <div className="rgrad-1 p-4 rounded-0 text-center ">
             <img
               src={img}
               alt="Profile"
@@ -30,11 +31,22 @@ const Profile = () => {
                 <span>{user.email}</span>
               </p>
             </div>
-            <p className="p-2 rounded-5 bg-glass  rgrad-1 text-light poppins-bold">
-              <FaChartLine className="me-2 text-light fs-2" />
-              {user.predictionsCount}
-              <span className="poppins-regular"> predicitons made</span>
-            </p>
+            <div className=" rounded-5 d-flex flex-column-reverse justify-content-between align-items-center  text-light poppins-bold">
+              <Button
+                danger
+                type="dashed"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                <FaSignOutAlt /> Logout
+              </Button>
+              <p className=" rounded-2 bg-glass text-dark px-2 py-1">
+                <FaChartLine className="me-2 text-dark fs-2" />
+                {user.predictionsCount}
+                <span className="poppins-regular"> predicitons made</span>
+              </p>
+            </div>
           </div>
         </Col>
       </Row>

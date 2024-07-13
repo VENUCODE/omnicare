@@ -169,7 +169,6 @@ const SymptomsForm = () => {
           <AutoComplete
             options={formattedSymptoms}
             value={currentSymp}
-            size="large"
             onSelect={(value, option) => {
               if (
                 !selectedSymptoms.some(

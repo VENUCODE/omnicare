@@ -4,6 +4,7 @@ import UploadImage from "../UploadImage";
 import { endpoints, prediction } from "../../endpoints";
 import { Skeleton } from "antd";
 import { LinearProgress } from "@mui/material";
+import { useUser } from "../../context/useUser";
 
 const BrainTumorForm = ({ reset }) => {
   const [fileList, setFileList] = useState([]);
@@ -42,7 +43,24 @@ const BrainTumorForm = ({ reset }) => {
       setLoading(false);
     }
   };
-
+  const handleClear = () => {
+    setFileList([]);
+    setResponse(null);
+  };
+  const { savePrediction } = useUser();
+  const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("image", fileList[0].originFileObj);
+    formData.append("prediction", response);
+    formData.append("category", "Brain Tumor detection");
+    const res = await savePrediction(formData, true);
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    handleClear();
+  };
   useEffect(() => {
     setResponse(null);
   }, [fileList]);
@@ -57,16 +75,21 @@ const BrainTumorForm = ({ reset }) => {
                 <h1 className="text-capitalize mb-3 poppins-medium">
                   {response?.replace("_", " ")}
                 </h1>
+                <div className="d-flex flex-row justify-content-between gap-1 p-1">
+                  <button
+                    className="bg-danger-subtle flex-grow-1 btn poppins-medium text-danger rounded-1"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </button>
+                  <button
+                    className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
+                    onClick={handleSave}
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
-              <button
-                className="bg-danger btn poppins-medium text-white rounded-0"
-                onClick={() => {
-                  setResponse(null);
-                  setFileList([]);
-                }}
-              >
-                Clear Response
-              </button>
             </div>
           </div>
         ) : (

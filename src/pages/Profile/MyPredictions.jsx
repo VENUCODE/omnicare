@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { Image, Modal as AntdModal, Typography } from "antd";
+import { Image, message, Typography } from "antd";
 import { Container, Row, Col } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query"; // Adjust based on your actual import for React Query
 import axios from "axios";
 import { endpoints, userUrl } from "../../endpoints";
 import { useUser } from "../../context/useUser";
 import Modal from "../../components/Modal";
+import TimeAgo from "react-timeago";
 
 const { Title } = Typography;
 
 const MyPredictions = () => {
   const { authToken } = useUser();
+  const { deletePrediction } = useUser();
+  const [selectedPrediction, setSelectedPrediction] = useState(null);
+
+  const handleViewPrediction = (prediction) => {
+    setSelectedPrediction(prediction);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPrediction(null);
+  };
   const {
     data: predictions = [],
     isLoading,
@@ -32,19 +43,17 @@ const MyPredictions = () => {
     },
   });
 
-  const [selectedPrediction, setSelectedPrediction] = useState(null);
-
-  const handleViewPrediction = (prediction) => {
-    setSelectedPrediction(prediction);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedPrediction(null);
-  };
-
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching predictions</p>;
-
+  const handleDelte = async (predictionId) => {
+    const res = await deletePrediction(predictionId);
+    if (res.success) {
+      refetchPredictions();
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+  };
   return (
     <Container className="py-4">
       {predictions.map((prediction) => (
@@ -55,7 +64,7 @@ const MyPredictions = () => {
                 {prediction.image && (
                   <div className="me-3">
                     <Image
-                      src={prediction.image}
+                      src={userUrl + prediction.image}
                       alt="Prediction"
                       className="rounded-3"
                       style={{
@@ -72,8 +81,10 @@ const MyPredictions = () => {
                 )}
                 <div className="poppins-light text-capitalize">
                   <h5 className="mb-2">{prediction.category}</h5>
-                  <h6 className="mb-3">{prediction.result || "Safe"}</h6>
-                  <small className="mb-2">15 mins ago</small>
+                  <h6 className="mb-3">{prediction.prediction}</h6>
+                  <small className="mb-2">
+                    <TimeAgo date={prediction.createdAt} />
+                  </small>
                 </div>
               </div>
               <div className="d-flex gap-1 flex-column w-25">
@@ -93,6 +104,9 @@ const MyPredictions = () => {
                   style={{
                     fontSize: "clamp(0.7rem,0.8rem,0.9rem)",
                     fontFamily: "poppins",
+                  }}
+                  onClick={() => {
+                    handleDelte(prediction._id);
                   }}
                   className="bg-glass rgrad-22 border-0 text-light rounded-0 p-1 px-2"
                 >
@@ -122,7 +136,7 @@ const MyPredictions = () => {
                 return (
                   <div key={key}>
                     <Image
-                      src={value}
+                      src={userUrl + "/" + value}
                       alt="Prediction"
                       className="rounded-3"
                       style={{
