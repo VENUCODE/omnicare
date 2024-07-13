@@ -6,7 +6,8 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import { VscAccount } from "react-icons/vsc";
 import "./navStyles.css";
 import logo from "../assets/omnicarelogo.svg";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 function Navbar() {
   const location = useLocation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -21,6 +22,11 @@ function Navbar() {
       return "profile";
     return "home";
   }
+
+  useEffect(() => {
+    setActive(getInitialActive(location.pathname));
+  }, [location.pathname]);
+
   function handleSetActive(link) {
     setActive(link);
   }
@@ -28,28 +34,32 @@ function Navbar() {
   return (
     <>
       {!isSmallDevice && (
-        <nav className="navbar navbar-expand-md bg-glass  container fixed-top mx-auto rounded-5 shadow-sm my-1">
+        <nav className="navbar navbar-expand-md bg-glass container fixed-top mx-auto rounded-5 shadow-sm my-1">
           <div className="container py-1 px-3">
             <Link to="/" className="navbar-brand poppins-bold text-white">
               <img src={logo} style={{ height: "2rem" }} />
               <span className="tlg">MNI</span>CARE
             </Link>
             <div className="collapse navbar-collapse">
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0 ">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className={`nav-item poppins-light`}>
                   <Link
                     to="/"
-                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "home" ? "rgrad-1 bg-glass rounded-5 " : ""}`}
+                    className={`nav-link py-0 text-capitalize transition-all text-light ${
+                      active === "home" ? "rgrad-1  bg-glass rounded-5" : ""
+                    }`}
                     onClick={() => handleSetActive("home")}
                   >
                     Home
                   </Link>
                 </li>
-                <li className={`nav-item poppins-light `}>
+                <li className={`nav-item poppins-light`}>
                   <Link
                     to="/plants"
-                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "plants" ? "rgrad-3 bg-glass rounded-5 " : ""}`}
-                    onClick={() => handleSetActive("plants")}
+                    className={`nav-link py-0 text-capitalize transition-all text-light ${
+                      active === "plant" ? "rgrad-3  bg-glass rounded-5" : ""
+                    }`}
+                    onClick={() => handleSetActive("plant")}
                   >
                     Plants
                   </Link>
@@ -57,19 +67,27 @@ function Navbar() {
                 <li className={`nav-item poppins-light`}>
                   <Link
                     to="/human"
-                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "human" ? "rgrad-2 bg-glass rounded-5 " : ""}`}
+                    className={`nav-link py-0 text-capitalize transition-all text-light ${
+                      active === "human"
+                        ? "rgrad-2 bg-dark bg-glass rounded-5"
+                        : ""
+                    }`}
                     onClick={() => handleSetActive("human")}
                   >
                     Human
                   </Link>
                 </li>
-                <li className={`nav-item poppins-light `}>
+                <li className={`nav-item poppins-light`}>
                   <Link
                     to="/profile"
-                    className={`nav-link  py-0 text-capitalize transition-all text-light  ${active === "profile" ? "rgrad-1 bg-glass rounded-5 " : ""}`}
+                    className={`nav-link py-0 text-capitalize transition-all text-light ${
+                      active === "profile"
+                        ? "rgrad-3 bg-glass bg-dark rounded-5"
+                        : ""
+                    }`}
                     onClick={() => handleSetActive("profile")}
                   >
-                    profile
+                    Profile
                   </Link>
                 </li>
               </ul>

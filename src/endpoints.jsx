@@ -1,5 +1,5 @@
 export const prediction = "http://127.0.0.1:5000";
-export const userUrl = "http://127.0.0.1:5500/";
+export const userUrl = "http://127.0.0.1:3000";
 export const endpoints = {
   brainTumor: "/brainTumour",
   diseasePredH: "/diseasePredict",
@@ -10,16 +10,10 @@ export const endpoints = {
   plantDisease: "/plantDiseasePredict",
   cropRecommend: "/cropRecommend",
   plantIdentify: "/plant-identify",
-
   //user management data
-  login: "/login",
-  signup: "/signup",
-  user_brainTumor: "/brainTumour",
-  user_diseasePredH: "/diseasePredict",
-  user_diabeticPredict: "/diabeticPredict",
-  user_heartPredict: "/heartPredict",
-  user_pneumonia: "/pneumonia",
-  user_plantDisease: "/plantDiseasePredict",
-  user_cropRecommend: "/crop-recommend",
-  user_plantIdentify: "/plant-identify",
+  login: "/user/login",
+  signup: "/user/signup",
+  mypredictions: "/predictions/mine",
+  deletePredcition: "/predictions/delete",
+  savePrediction: "/predictions/save",
 };

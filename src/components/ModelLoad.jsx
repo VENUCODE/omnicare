@@ -74,8 +74,8 @@ const ModelLoad = ({
   scale = 1,
   scene = true,
   imagepath = "",
-  rotation,
-  position,
+  rotation = [0, 0, 0],
+  position = [0, 0, 0],
   env,
   animation = true,
   ...props

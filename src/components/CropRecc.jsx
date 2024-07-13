@@ -145,7 +145,6 @@ const CropRec = () => {
                 {predictionResult}
               </h3>
               <span className="poppins-regular fs-5 text-gradient-3">
-                {" "}
                 is recommended to grow
               </span>
               <br />

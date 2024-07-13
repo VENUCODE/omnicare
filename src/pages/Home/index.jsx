@@ -87,10 +87,17 @@ const Home = () => {
 
   return (
     <div className="container-fluid d-flex flex-column gap-3 ">
-      <div className="bg-glass ">
+      <div className="bg-glass rgrad-1 ">
         <h2 className="text-white poppins-bold w-maxcontent mx-auto ">
           Explore our services
         </h2>
+
+        <pre className="text-center poppins-regular fs-6 text-light ">
+          We provide service in various aspects
+          <br />
+          We provide service in various
+          <br /> We provide service in various aspects aspects
+        </pre>
       </div>
       <div class="marquee-container">
         <marquee

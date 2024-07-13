@@ -1,17 +1,16 @@
 // src/components/Profile.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import { MdEmail, MdPerson } from "react-icons/md";
 import { FaChartLine } from "react-icons/fa";
 import img from "../../assets/blood.jpg";
+import { useUser } from "../../context/useUser";
 const Profile = () => {
-  // Sample user data (replace with actual data)
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    predictionsCount: 15,
-  };
-
+  const { userData } = useUser();
+  const [user, setUser] = useState(userData);
+  useEffect(() => {
+    setUser(userData);
+  }, [userData]);
   return (
     <Container className="py-4">
       <Row className="justify-content-center">
@@ -23,7 +22,7 @@ const Profile = () => {
               className="rounded-circle mb-3 bg-glass rgrad-1 border border-3 object-fit-cover "
               style={{ width: "240px", height: "240px", objectFit: "cover" }}
             />
-            <h3 className="mb-3 text-light poppins-medium">{user.name}</h3>
+            <h3 className="mb-3 text-light poppins-medium">{user.username}</h3>
 
             <div className="d-flex  flex-column mt-2 text-light">
               <p className="text-center poppins-regular">

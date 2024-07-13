@@ -35,7 +35,7 @@ export const HeroAnimation = () => {
           value: "#1b2c3d11",
         },
         image: "url('/src/assets/omnicarelogo.svg')",
-        position: "130% 250%",
+        position: "140% -300%",
         repeat: "no-repeat",
         size: "40%",
         opacity: 1,
@@ -61,7 +61,7 @@ export const HeroAnimation = () => {
       duration: 0,
       fpsLimit: 120,
       interactivity: {
-        detectsOn: "window",
+        detectsOn: "div",
         events: {
           onClick: {
             enable: true,
