@@ -1,11 +1,14 @@
+import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { Image } from "antd";
-import React from "react";
+import { Image, Modal as AntdModal, Typography } from "antd";
 import { Container, Row, Col } from "react-bootstrap";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query"; // Adjust based on your actual import for React Query
 import axios from "axios";
 import { endpoints, userUrl } from "../../endpoints";
 import { useUser } from "../../context/useUser";
+import Modal from "../../components/Modal";
+
+const { Title } = Typography;
 
 const MyPredictions = () => {
   const { authToken } = useUser();
@@ -28,6 +31,17 @@ const MyPredictions = () => {
       console.log("Error fetching predictions:", error);
     },
   });
+
+  const [selectedPrediction, setSelectedPrediction] = useState(null);
+
+  const handleViewPrediction = (prediction) => {
+    setSelectedPrediction(prediction);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPrediction(null);
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching predictions</p>;
 
@@ -70,6 +84,7 @@ const MyPredictions = () => {
                     fontFamily: "poppins",
                   }}
                   className="bg-glass rgrad-1 border-0 text-light rounded-0 p-1 px-2"
+                  onClick={() => handleViewPrediction(prediction)}
                 >
                   View
                 </Button>
@@ -88,6 +103,57 @@ const MyPredictions = () => {
           </Col>
         </Row>
       ))}
+
+      <Modal
+        open={selectedPrediction !== null}
+        onClose={handleCloseModal}
+        title={selectedPrediction?.category || ""}
+      >
+        <div className="text-light">
+          {Object.entries(selectedPrediction || {}).map(([key, value]) => {
+            switch (key) {
+              case "category":
+                return (
+                  <div key={key}>
+                    <h5 className="mb-2">{value}</h5>
+                  </div>
+                );
+              case "image":
+                return (
+                  <div key={key}>
+                    <Image
+                      src={value}
+                      alt="Prediction"
+                      className="rounded-3"
+                      style={{
+                        maxWidth: "400px",
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                );
+              case "inputs":
+              case "prediction":
+                return (
+                  <div key={key}>
+                    <h6 className="mb-2">{key}</h6>
+                    <p>{value}</p>
+                  </div>
+                );
+              case "createdAt":
+                return (
+                  <div key={key}>
+                    <small className="mb-2">{`${value} ago`}</small>
+                  </div>
+                );
+              default:
+                return null; // Handle other keys as needed
+            }
+          })}
+        </div>
+      </Modal>
     </Container>
   );
 };

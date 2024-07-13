@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import { endpoints, prediction } from "../endpoints";
 import CustomInput from "./CustomInput";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { useUser } from "../context/useUser";
 
 const markUpdata = [
   {
@@ -79,7 +80,7 @@ const CropRec = () => {
   const [formValue, setFormValue] = useState(INITIAL_FORM);
   const [predictionResult, setPredictionResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const { savePrediction } = useUser();
   const getCropRecommendation = async (inputValues) => {
     setLoading(true);
     console.log(inputValues);
@@ -135,6 +136,19 @@ const CropRec = () => {
     setFormValue(INITIAL_FORM);
   };
 
+  const handleSave = async () => {
+    const res = await savePrediction({
+      input: formValue,
+      category: "Crop recommendition",
+      prediction: predictionResult,
+    });
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    handleClear();
+  };
   return (
     <Container>
       {predictionResult && (
@@ -153,7 +167,7 @@ const CropRec = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="poppins-regular"
-                style={{ fontSize: "14px" }} // Adjust font size here
+                style={{ fontSize: "14px" }}
               >
                 Learn more about{" "}
                 <span className="text-capitalize text-small">
@@ -162,7 +176,6 @@ const CropRec = () => {
                 <FaExternalLinkAlt
                   style={{ fontSize: "12px", marginLeft: "4px" }}
                 />{" "}
-                {/* Adjust icon size and margin */}
               </Typography.Link>
             </div>
             <div className="d-flex flex-row justify-content-between gap-1 p-1">
@@ -174,7 +187,7 @@ const CropRec = () => {
               </button>
               <button
                 className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
-                onClick={handleClear}
+                onClick={handleSave}
               >
                 Save
               </button>

@@ -7,8 +7,9 @@ import {
   LinearProgress,
 } from "@mui/material";
 import axios from "axios";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { endpoints, prediction } from "../endpoints";
+import { useUser } from "../context/useUser";
 
 const HeartRisk = () => {
   const [formData, setFormData] = useState({
@@ -87,6 +88,21 @@ const HeartRisk = () => {
       thalassemia: "",
     });
     setPredictionResult(null);
+  };
+  const { savePrediction } = useUser();
+  const handleSave = async () => {
+    const res = await savePrediction({
+      input: { ...formData },
+      category: "Heart Risk prediciton",
+      prediction: predictionResult,
+    });
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    setPredictionResult(null);
+    handleClear();
   };
 
   return (
@@ -188,7 +204,7 @@ const HeartRisk = () => {
               </Button>
             </Grid>
           )}
-          {predictionResult !== null && (
+          {predictionResult && (
             <Grid item xs={12}>
               <Container>
                 <h3 className="poppins-bold text-gradient-2 mb-4">
@@ -207,15 +223,20 @@ const HeartRisk = () => {
                     )}
                   </h5>
                 </div>
-                <Button
-                  type="text"
-                  onClick={handleClear}
-                  danger
-                  block
-                  className="my-2"
-                >
-                  Clear Response
-                </Button>
+                <div className="d-flex flex-row justify-content-between gap-1 p-1">
+                  <button
+                    className="bg-danger-subtle flex-grow-1 btn poppins-medium text-danger rounded-1"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </button>
+                  <button
+                    className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
+                    onClick={handleSave}
+                  >
+                    Save
+                  </button>
+                </div>
               </Container>
             </Grid>
           )}

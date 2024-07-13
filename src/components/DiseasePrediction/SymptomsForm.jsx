@@ -12,6 +12,7 @@ import { symptoms } from "../../data/DiseaseData";
 import { endpoints, prediction } from "../../endpoints";
 import { formatDiseaseName } from "../webscrap";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { useUser } from "../../context/useUser";
 const formattedSymptoms = symptoms.map((symptom) => ({
   label: symptom.replace(/_/g, " ").toUpperCase(),
   value: symptom,
@@ -79,7 +80,6 @@ const SymptomsForm = () => {
   const getPrediction = async () => {
     try {
       setLoading(true);
-      console.log(selectedSymptoms.map((symptom) => symptom.value));
       const response = await fetch(prediction + endpoints.diseasePredH, {
         method: "POST",
         headers: {
@@ -95,7 +95,6 @@ const SymptomsForm = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       setPredictionResult(data.prediction);
     } catch (error) {
       console.error("Error getting prediction:", error);
@@ -108,6 +107,21 @@ const SymptomsForm = () => {
   const handleClear = () => {
     setPredictionResult(null);
     setSelectedSymptoms([]);
+  };
+  const { savePrediction } = useUser();
+  const handleSave = async () => {
+    const res = await savePrediction({
+      input: { symptoms: [...selectedSymptoms.map((i) => i.label)] },
+      category: "Disease prediction",
+      prediction: predictionResult,
+    });
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    setPredictionResult(null);
+    handleClear();
   };
 
   return (
@@ -142,7 +156,7 @@ const SymptomsForm = () => {
               </button>
               <button
                 className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
-                onClick={handleClear}
+                onClick={handleSave}
               >
                 Save
               </button>

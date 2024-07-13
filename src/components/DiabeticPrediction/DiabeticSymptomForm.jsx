@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { Container, Typography } from "@mui/material";
 import { endpoints, prediction } from "../../endpoints";
+import { useUser } from "../../context/useUser";
 
 const markUpdata = [
   {
@@ -132,6 +133,20 @@ const DiabeticSymptomForm = () => {
     setFormValue(INITIAL_FORM);
   };
 
+  const { savePrediction } = useUser();
+  const handleSave = async () => {
+    const res = await savePrediction({
+      input: { ...formValue },
+      category: "Diabetic Risk prediction",
+      prediction: predictionResult,
+    });
+    if (res.success) {
+      message.success(res.message);
+    } else {
+      message.error(res.message);
+    }
+    handleClear();
+  };
   return (
     <Container>
       {predictionResult && (
@@ -151,7 +166,7 @@ const DiabeticSymptomForm = () => {
               </button>
               <button
                 className="bg-success-subtle flex-grow-1 btn poppins-medium text-success rounded-1"
-                onClick={handleClear}
+                onClick={handleSave}
               >
                 Save
               </button>

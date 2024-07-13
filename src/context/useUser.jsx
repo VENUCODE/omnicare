@@ -65,7 +65,29 @@ export const UserProvider = ({ children }) => {
       };
     }
   };
-
+  const savePrediction = async (payload) => {
+    try {
+      const response = await axios.post(
+        `${userUrl}${endpoints.savePrediction}`,
+        { ...payload },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: authToken,
+          },
+        }
+      );
+      if (response) {
+        return { success: true, message: "Saved successfully" };
+      }
+    } catch (error) {
+      console.log("Failed to save prediction", error);
+      return {
+        success: false,
+        message: "Failed to save. Please try again later.",
+      };
+    }
+  };
   const logout = () => {
     clearAuthToken();
   };
@@ -88,6 +110,7 @@ export const UserProvider = ({ children }) => {
         userData,
         isAuthenticated,
         authToken,
+        savePrediction,
         login,
         signup,
         logout,
