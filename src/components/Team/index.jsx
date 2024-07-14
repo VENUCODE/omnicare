@@ -16,7 +16,7 @@ const Team = () => {
       <div>
         <div className="bg-glass mb-4">
           <h1 className="text-white  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
-            Meet our Guide
+            Our Guide
           </h1>
         </div>
         <Mentor />
@@ -24,7 +24,7 @@ const Team = () => {
       <div>
         <div className="bg-glass">
           <h1 className="text-light  rounded-bottom-2  poppins-semibold w-maxcontent mx-auto mt-0 px-1">
-            Meet our team
+            Our team
           </h1>
         </div>
         <ImageCarousel

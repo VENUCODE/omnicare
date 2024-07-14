@@ -3,8 +3,8 @@ import Carousel from "react-material-ui-carousel";
 import "./hero.css";
 import logo from "../../assets/omnicarelogo.svg";
 import ModelLoad from "../ModelLoad";
-import { HeroAnimation } from "../AnimatedBox/HeroAnimation";
 
+import doctor from "../../assets/doctor.webp";
 const Hero = () => {
   return (
     <div className="hero-container ">

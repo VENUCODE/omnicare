@@ -2,6 +2,7 @@ import React from "react";
 import ModelLoad from "../../components/ModelLoad";
 import { Link } from "react-router-dom";
 import "./style.css";
+import look from "../../assets/wehave.png";
 
 const Home = () => {
   const humanitems = [
@@ -86,20 +87,21 @@ const Home = () => {
   ];
 
   return (
-    <div className="container-fluid d-flex flex-column gap-3 ">
-      <div className="bg-glass rgrad-1 ">
-        <h2 className="text-white poppins-bold w-maxcontent mx-auto ">
-          Explore our services
-        </h2>
-
-        <pre className="text-center poppins-regular fs-6 text-light ">
-          We provide service in various aspects
-          <br />
-          We provide service in various
-          <br /> We provide service in various aspects aspects
-        </pre>
-      </div>
-      <div class="marquee-container">
+    <div className="container-fluid d-flex flex-column gap-3 position-relative">
+      <div class="marquee-container position-relative">
+        <div className="position-relative">
+          <img
+            src={look}
+            className="position-absolute img"
+            style={{ zIndex: 2, left: "-5%", maxWidth: "50vw" }}
+          />
+          <h2
+            className="position-absolute  text-white poppins-bold px-2 rounded-end-5 overflow-hidden text-center bg-glass w-maxcontent "
+            style={{ zIndex: 3, top: 0, left: 0 }}
+          >
+            Explore our services
+          </h2>
+        </div>
         <marquee
           className="marquee"
           width="100%"

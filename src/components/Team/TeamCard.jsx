@@ -1,4 +1,5 @@
 import React from "react";
+import person from "../../assets/person.png";
 const TeamCard = ({ data }) => {
   const { name, id, title, img = "" } = data;
   return (
@@ -7,10 +8,7 @@ const TeamCard = ({ data }) => {
         <div className="w-maxcontent content  bg-info">
           <div className="col-12  ">
             <img
-              src={
-                img ||
-                `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 10)}`
-              }
+              src={person}
               alt="img"
               style={{
                 height: "100px",

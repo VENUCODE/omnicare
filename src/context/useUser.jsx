@@ -52,7 +52,11 @@ export const UserProvider = ({ children }) => {
 
   const signup = async (formData) => {
     try {
-      const response = await axios.post(userUrl + endpoints.signup, formData);
+      const response = await axios.post(userUrl + endpoints.signup, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log(response);
       if (response) {
         return { success: true, message: "Signup successful" };
@@ -65,6 +69,7 @@ export const UserProvider = ({ children }) => {
       };
     }
   };
+
   const savePrediction = async (payload, formData = false) => {
     try {
       const headers = {

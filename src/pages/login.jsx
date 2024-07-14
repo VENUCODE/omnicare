@@ -12,32 +12,53 @@ import { useUser } from "../context/useUser";
 import { Container, Box } from "@mui/material";
 import { TinyColor } from "@ctrl/tinycolor";
 import { useNavigate } from "react-router-dom";
+import UploadImage from "../components/UploadImage";
 
 export default function LoginSignup() {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { login, signup } = useUser();
+  const [fileList, setFileList] = useState([]);
 
   const handleSubmit = async (values) => {
     setLoading(true);
     setError("");
     try {
-      const response = isLogin ? await login(values) : await signup(values);
-      setLoading(false);
-      if (!response.success) {
-        setError(response.message);
-        message.error(response.message, 1);
-      } else {
-        if (!isLogin) {
-          setIsLogin(true);
+      if (isLogin) {
+        const response = await login(values);
+        setLoading(false);
+        if (!response.success) {
+          setError(response.message);
+          message.error(response.message, 1);
+        } else {
+          message.success(response.message, 3);
+          console.log(response.message);
         }
-        message.success(response.message, 3);
-        console.log(response.message);
+      } else {
+        const formData = new FormData();
+        for (const key in values) {
+          formData.append(key, values[key]);
+        }
+        if (fileList.length > 0) {
+          formData.append("image", fileList[0].originFileObj);
+        } else {
+          throw new Error("profile image required");
+        }
+        const response = await signup(formData);
+        setLoading(false);
+        if (!response.success) {
+          setError(response.message);
+          message.error(response.message, 1);
+        } else {
+          setIsLogin(true);
+          message.success(response.message, 3);
+          console.log(response.message);
+        }
       }
     } catch (error) {
       setLoading(false);
-      setError("Something went wrong. Please try again later.");
+      setError(error.message);
     }
   };
 
@@ -75,7 +96,7 @@ export default function LoginSignup() {
           </span>
         </Typography>
         {error && (
-          <Typography color="error" className="poppins-light">
+          <Typography color="error" className="poppins-light text-danger">
             {error}
           </Typography>
         )}
@@ -83,22 +104,28 @@ export default function LoginSignup() {
           name="authForm"
           initialValues={{ remember: true }}
           onFinish={handleSubmit}
+          onChange={() => setError(null)}
           onFinishFailed={handleFinishFailed}
           style={{ width: "100%", marginTop: 16 }}
         >
           {!isLogin && (
-            <Form.Item
-              name="username"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
-            >
-              <Input
-                size="large"
-                placeholder="Username"
-                className="poppins-light"
-              />
-            </Form.Item>
+            <>
+              <Form.Item name="Profile image">
+                <UploadImage fileList={fileList} setFileList={setFileList} />
+              </Form.Item>
+              <Form.Item
+                name="username"
+                rules={[
+                  { required: true, message: "Please input your username!" },
+                ]}
+              >
+                <Input
+                  size="large"
+                  placeholder="Username"
+                  className="poppins-light"
+                />
+              </Form.Item>
+            </>
           )}
           <Form.Item
             name="email"

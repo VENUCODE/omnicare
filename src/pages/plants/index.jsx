@@ -11,7 +11,7 @@ import ModelLoad from "../../components/ModelLoad";
 import Modal from "../../components/Modal";
 import PlantDisease from "../../components/PlantDiseasePredict";
 import CropRec from "../../components/CropRecc";
-
+import plant from "../../assets/plant.jpeg";
 const Plants = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -73,6 +73,15 @@ const Plants = () => {
             >
               Plant Prognosis
             </h2>
+            {/* <img
+              src={plant}
+              className="object-fit-cover w-100 bg-glass rounded-2"
+              style={{
+                width: "300px",
+
+                height: "100%",
+              }}
+            /> */}
           </div>
         </Grid>
         {plantitems.map((model, index) => (

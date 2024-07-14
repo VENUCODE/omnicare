@@ -51,6 +51,7 @@
 
 .fade-left {
     left: 0;
+    width: 30%;
     background: linear-gradient(to right, var(--body-bg), var(--body-bg), transparent);
 }
 

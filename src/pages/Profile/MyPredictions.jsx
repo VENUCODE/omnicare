@@ -36,6 +36,7 @@ const MyPredictions = () => {
           Authorization: authToken,
         },
       });
+      console.log(response.data);
       return response.data;
     },
     onError: (error) => {
@@ -56,6 +57,17 @@ const MyPredictions = () => {
   };
   return (
     <Container className="py-4">
+      {predictions.length === 0 && (
+        <div className="d-flex justify-content-center align-items-center flex-column">
+          <img
+            src="https://cdn3d.iconscout.com/3d/premium/thumb/girl-dont-know-gesture-6746892-5580514.png"
+            alt="no predictions yet"
+          />
+          <h1 className="text-light position-absolute bg-glass overflow-hidden px-3 py-2 align-items-center rounded-5">
+            No predictions yet
+          </h1>
+        </div>
+      )}
       {predictions.map((prediction) => (
         <Row key={prediction.createdAt} className="mb-3">
           <Col xs={12}>
@@ -64,7 +76,7 @@ const MyPredictions = () => {
                 {prediction.image && (
                   <div className="me-3">
                     <Image
-                      src={userUrl + prediction.image}
+                      src={`${userUrl}/${prediction.image}`}
                       alt="Prediction"
                       className="rounded-3"
                       style={{
