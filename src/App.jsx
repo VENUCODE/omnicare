@@ -20,7 +20,7 @@ import { useUser } from "./context/useUser";
 import Human from "./pages/human";
 import Plants from "./pages/plants";
 import Profile from "./pages/Profile";
-import Login from "./pages/login"; // Add your login component
+import Login from "./pages/login";
 
 function Layout() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");

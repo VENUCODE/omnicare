@@ -37,17 +37,17 @@ const Home = () => {
         "Predict diseases from symptoms using our model. Our system identifies potential diseases based on your symptoms. Gain quick and reliable health insights. Early detection can lead to better health outcomes.",
       rotation: [33, 0, 0],
     },
-    {
-      to: "/human",
-      path: "/models/lung/scene.gltf",
-      img: "/imgs/lung.png",
-      scale: 0.03,
-      position: [0, -5, 0],
-      animation: false,
-      title: "Pneumonia Prediction",
-      description:
-        "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
-    },
+    // {
+    //   to: "/human",
+    //   path: "/models/lung/scene.gltf",
+    //   img: "/imgs/lung.png",
+    //   scale: 0.03,
+    //   position: [0, -5, 0],
+    //   animation: false,
+    //   title: "Pneumonia Prediction",
+    //   description:
+    //     "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
+    // },
   ];
 
   const plantitems = [
@@ -73,17 +73,17 @@ const Home = () => {
       description:
         "Identify plant diseases from leaf images accurately. Our technology helps in early disease detection. Protect your crops with timely intervention. Ensure healthy plant growth with precise diagnostics.",
     },
-    {
-      to: "/plants",
-      path: "/models/pplant/scene.gltf",
-      img: "/cropid.jpg",
-      position: [0, -3, 0],
-      rotation: [0.3, 0, 0],
-      scale: 6,
-      title: "Plant Identification",
-      description:
-        "Identify plants and predict diseases from symptoms. Our model provides accurate plant identification. Understand plant health and potential issues. Improve plant care with our diagnostic tools.",
-    },
+    // {
+    //   to: "/plants",
+    //   path: "/models/pplant/scene.gltf",
+    //   img: "/cropid.jpg",
+    //   position: [0, -3, 0],
+    //   rotation: [0.3, 0, 0],
+    //   scale: 6,
+    //   title: "Plant Identification",
+    //   description:
+    //     "Identify plants and predict diseases from symptoms. Our model provides accurate plant identification. Understand plant health and potential issues. Improve plant care with our diagnostic tools.",
+    // },
   ];
 
   return (

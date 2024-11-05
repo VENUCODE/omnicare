@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
-import { Image, message, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, CircularProgress } from "@mui/material";
+import { Divider, Image, message, Typography } from "antd";
 import { Container, Row, Col } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query"; // Adjust based on your actual import for React Query
 import axios from "axios";
@@ -15,7 +15,7 @@ const MyPredictions = () => {
   const { authToken } = useUser();
   const { deletePrediction } = useUser();
   const [selectedPrediction, setSelectedPrediction] = useState(null);
-
+  const [delLoad, setDelLoad] = useState(false);
   const handleViewPrediction = (prediction) => {
     setSelectedPrediction(prediction);
   };
@@ -47,6 +47,7 @@ const MyPredictions = () => {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching predictions</p>;
   const handleDelte = async (predictionId) => {
+    setDelLoad(true);
     const res = await deletePrediction(predictionId);
     if (res.success) {
       refetchPredictions();
@@ -54,6 +55,7 @@ const MyPredictions = () => {
     } else {
       message.error(res.message);
     }
+    setDelLoad(false);
   };
   return (
     <Container className="py-4">
@@ -122,37 +124,37 @@ const MyPredictions = () => {
                   }}
                   className="bg-glass rgrad-22 border-0 text-light rounded-0 p-1 px-2"
                 >
-                  Delete
+                  {delLoad ? <CircularProgress /> : "Delete"}
                 </Button>
               </div>
             </div>
           </Col>
         </Row>
       ))}
-
       <Modal
         open={selectedPrediction !== null}
         onClose={handleCloseModal}
-        title={selectedPrediction?.category || ""}
+        title={"🏆" + selectedPrediction?.category || ""}
       >
         <div className="text-light">
           {Object.entries(selectedPrediction || {}).map(([key, value]) => {
             switch (key) {
-              case "category":
-                return (
-                  <div key={key}>
-                    <h5 className="mb-2">{value}</h5>
-                  </div>
-                );
               case "image":
                 return (
                   <div key={key}>
+                    <Divider
+                      orientation="left"
+                      orientationMargin={0}
+                      className=" poppins-medium"
+                    >
+                      Input image
+                    </Divider>
                     <Image
                       src={userUrl + "/" + value}
                       alt="Prediction"
-                      className="rounded-3"
+                      className="text-dark rounded-3"
                       style={{
-                        maxWidth: "400px",
+                        maxWidth: "200px",
                         width: "100%",
                         height: "auto",
                         objectFit: "cover",
@@ -160,18 +162,73 @@ const MyPredictions = () => {
                     />
                   </div>
                 );
-              case "inputs":
+              case "input":
+                return (
+                  <div key={key}>
+                    <Divider
+                      orientation="left"
+                      orientationMargin={0}
+                      className=" poppins-medium"
+                    >
+                      🧐 Input parameters
+                    </Divider>{" "}
+                    {typeof value === "object" && !Array.isArray(value) ? (
+                      <ul>
+                        {Object.entries(value).map(([subKey, subValue]) => (
+                          <li key={subKey} className="text-dark">
+                            <strong className="poppins-medium text-capitalize">
+                              {subKey}:
+                            </strong>{" "}
+                            {Array.isArray(subValue) ? (
+                              <ul>
+                                {subValue.map((item, index) => (
+                                  <li
+                                    className="poppins-medium text-capitalize"
+                                    key={index}
+                                  >
+                                    {item}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <span>{subValue}</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>{value}</p>
+                    )}
+                  </div>
+                );
               case "prediction":
                 return (
                   <div key={key}>
-                    <h6 className="mb-2">{key}</h6>
-                    <p>{value}</p>
+                    <Divider
+                      orientation="left"
+                      orientationMargin={0}
+                      className=" poppins-medium"
+                    >
+                      ✨ Prediction result
+                    </Divider>
+                    <h4 className="text-capitalize text-center  poppins-bold text-gradient-2 ">
+                      {value}
+                    </h4>
                   </div>
                 );
               case "createdAt":
                 return (
-                  <div key={key}>
-                    <small className="mb-2">{`${value} ago`}</small>
+                  <div key={key} className="text-dark poppins-light">
+                    <Divider
+                      orientation="left"
+                      orientationMargin={0}
+                      className=" poppins-medium"
+                    >
+                      ⌚ Time
+                    </Divider>
+                    <small className="text-dark mb-2">
+                      <TimeAgo date={value} />
+                    </small>
                   </div>
                 );
               default:

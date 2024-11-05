@@ -39,17 +39,7 @@ const Plants = () => {
       description:
         "Identify plant diseases from leaf images accurately. Our technology helps in early disease detection. Protect your crops with timely intervention. Ensure healthy plant growth with precise diagnostics.",
     },
-    {
-      to: "/plants",
-      path: "/models/pplant/scene.gltf",
-      img: "/cropid.jpg",
-      position: [0, -3, 0],
-      rotation: [0.3, 0, 0],
-      scale: 6,
-      title: "Plant Identification",
-      description:
-        "Identify plants and predict diseases from symptoms. Our model provides accurate plant identification. Understand plant health and potential issues. Improve plant care with our diagnostic tools.",
-    },
+
   ];
 
   const handleOpenModal = (item) => {

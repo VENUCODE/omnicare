@@ -9,7 +9,7 @@ const Team = () => {
     { name: "Dharma Teja G", id: "O190000", title: "Documentor" },
     { name: "Vinitha K", id: "O190000", title: "Frontend Dev" },
     { name: "Venu Bitra", id: "O190000", title: "Documentor" },
-    { name: "Babu Y", id: "O190000", title: "Nothing" },
+    { name: "Babu Y", id: "O190000", title: "Documentor" },
   ];
   return (
     <div className="container-fluid d-flex flex-column gap-3">

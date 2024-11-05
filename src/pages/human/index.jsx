@@ -51,17 +51,17 @@ const Human = () => {
         "Predict diseases from symptoms using our model. Our system identifies potential diseases based on your symptoms. Gain quick and reliable health insights. Early detection can lead to better health outcomes.",
       rotation: [45, 0, 0],
     },
-    {
-      to: "/human",
-      path: "/models/lung/scene.gltf",
-      img: "/imgs/lung.png",
-      scale: 0.03,
-      position: [0, -5, 0],
-      animation: false,
-      title: "Pneumonia Prediction",
-      description:
-        "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
-    },
+    // {
+    //   to: "/human",
+    //   path: "/models/lung/scene.gltf",
+    //   img: "/imgs/lung.png",
+    //   scale: 0.03,
+    //   position: [0, -5, 0],
+    //   animation: false,
+    //   title: "Pneumonia Prediction",
+    //   description:
+    //     "Predict pneumonia from symptoms with our tool. Our model helps in early detection and diagnosis. Get accurate results to start timely treatment. Protect your respiratory health with advanced technology.",
+    // },
     {
       to: "/human",
       path: "/models/diabetic/scene.gltf",

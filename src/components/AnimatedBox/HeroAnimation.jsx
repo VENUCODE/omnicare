@@ -61,7 +61,7 @@ export const HeroAnimation = () => {
       duration: 0,
       fpsLimit: 120,
       interactivity: {
-        detectsOn: "div",
+        detectsOn: "window",
         events: {
           onClick: {
             enable: true,
