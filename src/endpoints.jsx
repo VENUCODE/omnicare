@@ -1,6 +1,6 @@
 export const prediction = "http://127.0.0.1:5000";
 //export const userUrl = "http://127.0.0.1:3000";
-export const userUrl = "https://omni-backend-gikr.onrender.com"
+export const userUrl = "https://omni-backend-jmog.onrender.com";
 export const endpoints = {
   brainTumor: "/brainTumour",
   diseasePredH: "/diseasePredict",
