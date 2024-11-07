@@ -71,10 +71,8 @@ const SymptomsForm = () => {
   const [loading, setLoading] = useState(false);
   const [predictionResult, setPredictionResult] = useState(null);
 
-  const removeSymptom = (symp) => {
-    setSelectedSymptoms((prevSymptoms) =>
-      prevSymptoms.filter((value) => value.value !== symp)
-    );
+  const removeSymptom = (sympValue) => {
+    console.log(selectedSymptoms);
   };
 
   const getPrediction = async () => {
@@ -202,7 +200,7 @@ const SymptomsForm = () => {
         </div>
       )}
       {loading && <Skeleton.Input active={true} block />}
-      {!predictionResult && (
+      {predictionResult === null && (
         <Divider className="my-3" orientation="left" orientationMargin={0}>
           {selectedSymptoms.length > 0 ? (
             <span className="poppins-medium text-gradient-1">
@@ -215,20 +213,30 @@ const SymptomsForm = () => {
           )}
         </Divider>
       )}
-      {!predictionResult && selectedSymptoms.length > 0 && (
+      {predictionResult === null && (
         <div className="d-flex flex-wrap">
           {selectedSymptoms.map((item, index) => (
             <Tag
-              closable
               key={index}
               size="large"
-              onClose={() => removeSymptom(item.value)}
               style={{ backgroundColor: getRandomPaleColor() }}
               className="m-1 poppins-medium text-capitalize"
             >
               {item.label}
             </Tag>
           ))}
+          <div className="w-100">
+            {selectedSymptoms.length > 0 && (
+              <Button
+                onClick={handleClear}
+                block
+                variant="filled"
+                color="danger"
+              >
+                Clear all
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>
