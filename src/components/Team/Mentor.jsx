@@ -5,9 +5,8 @@ import person from "../../assets/person.png";
 
 const Mentor = ({
   image = "https://picsum.photos/200/300?random=2",
-  title = "Mallikarjuna Nandi",
+  title = "Sreekanth T",
   subtitle = "Asst.Professor IIIT Ongole",
-  description = "Lorem ispusm",
 }) => {
   return (
     <div className="row ">
@@ -25,16 +24,14 @@ const Mentor = ({
       </div>
       <div className="bg-glass rgrad-r col-md-7 col-12 rounded-0 position">
         <div>
-          <h1 className="text-white poppins-medium w-maxcontent">
-            Mr. Mallikarjuna Nandi
-          </h1>
+          <h1 className="text-white poppins-medium w-maxcontent">{title}</h1>
           <h5 className="text-light poppins-regular w-maxcontent">
             Assistant Professor@ IIIT ONGOLE
           </h5>
         </div>
         <div className="position-relative ">
           <p className="poppins-extralight text-light">
-            Our HoD exemplifies visionary leadership and profound expertise in
+            Our guide exemplifies visionary leadership and profound expertise in
             computer science. He fosters innovation and empowers students to
             excel, combining deep knowledge with unwavering support. His
             optimism and guidance inspire growth and transformation, shaping

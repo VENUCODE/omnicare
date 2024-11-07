@@ -2,14 +2,12 @@ import React from "react";
 import ImageCarousel from "../cmp/ImageCarousel";
 import TeamCard from "./TeamCard";
 import Mentor from "./Mentor";
+import { Divider } from "@mui/material";
 
 const Team = () => {
   const team = [
-    { name: "Yedukondalu naik", id: "O190679", title: "Software Dev" },
-    { name: "Dharma Teja G", id: "O190000", title: "Documentor" },
-    { name: "Vinitha K", id: "O190000", title: "Frontend Dev" },
-    { name: "Venu Bitra", id: "O190000", title: "Documentor" },
-    { name: "Babu Y", id: "O190000", title: "Documentor" },
+    { name: "Baladithya V", id: "O190629", title: "Team Lead" },
+    { name: "Charan M", id: "O190417", title: "Teammate" },
   ];
   return (
     <div className="container-fluid d-flex flex-column gap-3">
@@ -27,23 +25,23 @@ const Team = () => {
             Our team
           </h1>
         </div>
-        <ImageCarousel
+        {/* <ImageCarousel
           dots={false}
           slidesToScroll={1}
           noOfSlides={3}
           draggable={true}
           className="py-2 container-fluid"
-        >
+        > */}
+        <div className="container-fluid bg-glass d-flex flex-row h-100 justify-content-center gap-4 py-5">
           {team.map((data, i) => {
             return (
-              <div key={i}>
-                <div className="row bg-transparent">
-                  <TeamCard data={data} />
-                </div>
+              <div key={i} className="card p-4">
+                <TeamCard data={data} />
               </div>
             );
           })}
-        </ImageCarousel>
+        </div>
+        {/* </ImageCarousel> */}
       </div>
     </div>
   );

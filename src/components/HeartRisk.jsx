@@ -64,6 +64,7 @@ const HeartRisk = () => {
         params: { input_data: JSON.stringify(input_data) },
       });
       setPredictionResult(response.data.prediction);
+      console.log(predictionResult);
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
@@ -94,7 +95,8 @@ const HeartRisk = () => {
     const res = await savePrediction({
       input: { ...formData },
       category: "Heart Risk prediciton",
-      prediction: predictionResult,
+      prediction:
+        predictionResult === 0 ? "No heart Risk" : "Your heart is at risk",
     });
     if (res.success) {
       message.success(res.message);
@@ -109,7 +111,7 @@ const HeartRisk = () => {
     <Container className="mt-4">
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
-          {!predictionResult &&
+          {predictionResult === null &&
             [
               {
                 label: "Age",
@@ -197,14 +199,14 @@ const HeartRisk = () => {
               <LinearProgress color="primary" />
             </Grid>
           )}
-          {!predictionResult && (
+          {predictionResult === null && (
             <Grid item xs={12}>
               <Button type="dashed" htmlType="submit" danger block>
                 Get prediction
               </Button>
             </Grid>
           )}
-          {predictionResult && (
+          {predictionResult !== null && (
             <Grid item xs={12}>
               <Container>
                 <h3 className="poppins-bold text-gradient-2 mb-4">
